@@ -1,0 +1,148 @@
+
+import { useState, useEffect } from 'react';
+import {
+  Box,
+  Container,
+  Typography,
+  Grid,
+  Paper,
+  LinearProgress,
+  Stack,
+} from '@mui/material';
+import FadeInSection from './FadeInSection';
+import FadeInItem from './FadeInItem';
+import skillsData from '../data/skills';
+
+const SkillBar = ({ name, icon, level, index }) => {
+  const [animatedLevel, setAnimatedLevel] = useState(0);
+  const [isHovered, setIsHovered] = useState(false);
+
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      setAnimatedLevel(level);
+    }, index * 100);
+    return () => clearTimeout(timer);
+  }, [level, index]);
+
+  return (
+    <Box 
+      mb={3} 
+      sx={{ width: '100%' }}
+      onMouseEnter={() => setIsHovered(true)}
+      onMouseLeave={() => setIsHovered(false)}
+    >
+      <Stack direction="row" justifyContent="space-between" alignItems="center" mb={0.5}>
+        <Stack direction="row" spacing={1} alignItems="center">
+          <Box
+            sx={{
+              transform: isHovered ? 'rotate(360deg)' : 'rotate(0deg)',
+              transition: 'transform 0.6s ease-in-out',
+              display: 'flex',
+              alignItems: 'center',
+            }}
+          >
+            {icon}
+          </Box>
+          <Typography fontWeight={500}>{name}</Typography>
+        </Stack>
+        <Typography variant="body2" color="text.secondary">
+          {animatedLevel}%
+        </Typography>
+      </Stack>
+      <LinearProgress
+        variant="determinate"
+        value={animatedLevel}
+        sx={{
+          height: 8,
+          borderRadius: 4,
+          backgroundColor: '#e0e7ef',
+          transition: 'all 0.8s ease-in-out',
+          '& .MuiLinearProgress-bar': {
+            backgroundColor: '#2563eb',
+            transition: 'transform 0.8s ease-in-out',
+            background: isHovered 
+              ? 'linear-gradient(90deg, #2563eb 0%, #3b82f6 50%, #2563eb 100%)'
+              : '#2563eb',
+          },
+        }}
+      />
+    </Box>
+  );
+};
+
+const Skills = () => {
+  return (
+    <FadeInSection>
+      <Box id="skills" sx={{ py: { xs: 10, md: 14 }, backgroundColor: '#fff' }}>
+        <Container style={{maxWidth: '100%'}}>
+          <Box textAlign="center" mb={6}>
+            <Typography variant="h4" color="primary" gutterBottom>
+              Skills
+            </Typography>
+            <Typography variant="body1" color="text.secondary" maxWidth="md" mx="auto">
+              A comprehensive overview of my technical expertise and proficiency levels across various domains, including programming languages, web development, artificial intelligence, and other technologies.
+            </Typography>
+          </Box>
+          <Grid container spacing={4} justifyContent="center">
+            {Object.entries(skillsData).map(([category, items], index) => (
+              <Grid item xs={12} sm={6} md={4} lg={3} key={category}>
+                <FadeInItem delay={index * 0.1}>
+                  <Paper
+                    elevation={3}
+                    sx={{
+                      p: 4,
+                      borderRadius: 3,
+                      backgroundColor: '#f8fafc',
+                      height: '500px',
+                      display: 'flex',
+                      width: '400px',
+                      flexDirection: 'column',
+                      border: '1px solid #e2e8f0',
+                      transition: 'all 0.3s ease-in-out',
+                      '&:hover': {
+                        transform: 'translateY(-8px)',
+                        boxShadow: '0 12px 30px rgba(0,0,0,0.15)',
+                        borderColor: '#2563eb',
+                      },
+                    }}
+                  >
+                    <Typography variant="h6" color="primary" mb={3} fontWeight={600} textAlign="center">
+                      {category}
+                    </Typography>
+                    <Box sx={{ flex: 1, overflow: 'hidden' }}>
+                      <Box sx={{ 
+                        height: '100%', 
+                        overflowY: 'auto',
+                        pr: 1,
+                        '&::-webkit-scrollbar': {
+                          width: '4px',
+                        },
+                        '&::-webkit-scrollbar-track': {
+                          background: '#f1f1f1',
+                          borderRadius: '2px',
+                        },
+                        '&::-webkit-scrollbar-thumb': {
+                          background: '#c1c1c1',
+                          borderRadius: '2px',
+                        },
+                        '&::-webkit-scrollbar-thumb:hover': {
+                          background: '#a8a8a8',
+                        },
+                      }}>
+                        {items.map((skill, skillIndex) => (
+                          <SkillBar key={skill.name} {...skill} index={skillIndex} />
+                        ))}
+                      </Box>
+                    </Box>
+                  </Paper>
+                </FadeInItem>
+              </Grid>
+            ))}
+          </Grid>
+        </Container>
+      </Box>
+    </FadeInSection>
+  );
+};
+
+export default Skills;

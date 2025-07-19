@@ -1,0 +1,502 @@
+import React from 'react';
+import {
+  Box,
+  Container,
+  Typography,
+  Stack,
+  Card,
+  CardContent,
+  IconButton,
+  Button,
+  Paper,
+  Grid,
+} from '@mui/material';
+import EmailIcon from '@mui/icons-material/Email';
+import PhoneIcon from '@mui/icons-material/Phone';
+import LinkedInIcon from '@mui/icons-material/LinkedIn';
+import GitHubIcon from '@mui/icons-material/GitHub';
+import ContactMailIcon from '@mui/icons-material/ContactMail';
+import FadeInItem from './FadeInItem';
+
+const contactInfo = [
+  {
+    icon: <EmailIcon color="primary" />,
+    label: 'Email',
+    value: 'abdullahmasood163@gmail.com',
+    link: 'mailto:abdullahmasood163@gmail.com',
+  },
+  {
+    icon: <PhoneIcon color="primary" />,
+    label: 'Phone',
+    value: '+33-751-479-304',
+    link: 'tel:+33751479304',
+  },
+  {
+    icon: <LinkedInIcon color="primary" />,
+    label: 'LinkedIn',
+    value: 'linkedin.com/in/abdullah9202',
+    link: 'https://linkedin.com/in/abdullah9202',
+  },
+  {
+    icon: <GitHubIcon color="primary" />,
+    label: 'GitHub',
+    value: 'github.com/Alucard008',
+    link: 'https://github.com/Alucard008',
+  },
+];
+
+const inputStyles = {
+  width: '100%',
+  padding: '18px 22px',
+  fontSize: '1rem',
+  fontWeight: 500,
+  color: '#1e293b',
+  backgroundColor: '#ffffff',
+  border: '2px solid #e2e8f0',
+  borderRadius: '16px',
+  outline: 'none',
+  transition: 'all 0.4s cubic-bezier(0.4, 0, 0.2, 1)',
+  boxSizing: 'border-box',
+  boxShadow: '0 2px 8px rgba(0, 0, 0, 0.04)',
+};
+
+const inputHoverStyles = {
+  border: '2px solid #2563eb',
+  boxShadow: '0 6px 20px rgba(37, 99, 235, 0.15)',
+  transform: 'translateY(-2px)',
+  backgroundColor: '#ffffff',
+};
+
+const inputFocusStyles = {
+  border: '2px solid #2563eb',
+  boxShadow: '0 0 0 4px rgba(37, 99, 235, 0.1), 0 8px 25px rgba(37, 99, 235, 0.15)',
+  transform: 'translateY(-1px)',
+  backgroundColor: '#ffffff',
+};
+
+const labelStyles = {
+  display: 'block',
+  marginBottom: '10px',
+  fontSize: '0.95rem',
+  fontWeight: 600,
+  color: '#64748b',
+  transition: 'all 0.3s ease-in-out',
+  letterSpacing: '0.5px',
+  textTransform: 'uppercase',
+  '&:hover': {
+    color: '#2563eb',
+  },
+};
+
+const inputContainerStyles = {
+  position: 'relative',
+  marginBottom: '20px',
+  transition: 'all 0.3s ease-in-out',
+  '&:hover': {
+    transform: 'translateY(-1px)',
+  },
+};
+
+
+const Contact = () => {
+  const handleInputHover = (e) => {
+    Object.assign(e.target.style, inputHoverStyles);
+  };
+
+  const handleInputLeave = (e) => {
+    Object.assign(e.target.style, inputStyles);
+  };
+
+  const handleInputFocus = (e) => {
+    Object.assign(e.target.style, inputFocusStyles);
+  };
+
+  const handleInputBlur = (e) => {
+    Object.assign(e.target.style, inputStyles);
+  };
+
+  return (
+    <Box id="contact" sx={{ py: { xs: 12, md: 16 }, minHeight: '100vh', display: 'flex', alignItems: 'center' }}>
+      <Container sx={{ maxWidth: '100%', background: 'linear-gradient(135deg, #e3f2fd 0%, #f3e5f5 100%)', py: { xs: 4, md: 8 } }}>
+        <Box
+          sx={{
+            display: 'flex',
+            flexDirection: { xs: 'column', lg: 'row' },
+            alignItems: 'flex-start',
+            justifyContent: 'space-between',
+            gap: { xs: 4, lg: 8 },
+            maxWidth: '1400px',
+            mx: 'auto',
+          }}
+        >
+          {/* Left - Info Cards */}
+          <Box
+            sx={{
+              display: 'flex',
+              flexDirection: 'column',
+              alignItems: { xs: 'center', lg: 'flex-start' },
+              width: { xs: '100%', lg: '45%' },
+              minWidth: { xs: '100%', lg: '400px' },
+            }}
+          >
+            <Box textAlign="center" mb={6} sx={{ width: '100%' }}>
+              <Typography variant="h3" color="primary" sx={{ fontWeight: 400, mb: 2, fontSize: { xs: '2rem', md: '2.5rem' } }}>
+                Get in Touch
+              </Typography>
+              <Typography variant="h6" color="text.secondary" sx={{ lineHeight: 1.6 , textAlign: 'center' }}>
+                Feel free to reach out for collaborations, job opportunities, or just a friendly chat.
+              </Typography>
+            </Box>
+
+            <Stack spacing={3} sx={{ width: '100%' }}>
+              {contactInfo.map((info, index) => (
+                <FadeInItem key={info.label} delay={0.1 * index}>
+                  <Card
+                    elevation={0}
+                    sx={{
+                      width: '100%',
+                      borderRadius: '20px',
+                      background: 'linear-gradient(135deg, rgba(255, 255, 255, 0.9) 0%, rgba(248, 250, 252, 0.9) 100%)',
+                      border: '2px solid rgba(37, 99, 235, 0.08)',
+                      backdropFilter: 'blur(10px)',
+                      transition: 'all 0.4s cubic-bezier(0.4, 0, 0.2, 1)',
+                      cursor: 'pointer',
+                      position: 'relative',
+                      overflow: 'hidden',
+                      '&::before': {
+                        content: '""',
+                        position: 'absolute',
+                        top: 0,
+                        left: 0,
+                        right: 0,
+                        bottom: 0,
+                        background: 'linear-gradient(135deg, rgba(37, 99, 235, 0.05) 0%, transparent 100%)',
+                        opacity: 0,
+                        transition: 'opacity 0.3s ease-in-out',
+                      },
+                      '&:hover': {
+                        transform: 'translateY(-8px) scale(1.02)',
+                        boxShadow: '0 20px 40px rgba(37, 99, 235, 0.15), 0 8px 16px rgba(0, 0, 0, 0.1)',
+                        border: '2px solid rgba(37, 99, 235, 0.2)',
+                        '&::before': {
+                          opacity: 1,
+                        },
+                        '& .click-text': {
+                          opacity: 1,
+                          transform: 'translateX(0)',
+                        },
+                      },
+                    }}
+                  >
+                    <CardContent
+                      sx={{
+                        display: 'flex',
+                        alignItems: 'center',
+                        gap: 4,
+                        py: 4,
+                        px: 5,
+                        position: 'relative',
+                        zIndex: 1,
+                      }}
+                    >
+                      <Box
+                        sx={{
+                          position: 'relative',
+                          display: 'flex',
+                          alignItems: 'center',
+                          justifyContent: 'center',
+                        }}
+                      >
+                        <Box
+                          sx={{
+                            position: 'absolute',
+                            width: '60px',
+                            height: '60px',
+                            borderRadius: '50%',
+                            background: 'linear-gradient(135deg, rgba(37, 99, 235, 0.1) 0%, rgba(37, 99, 235, 0.05) 100%)',
+                            animation: 'pulse 2s infinite',
+                            '@keyframes pulse': {
+                              '0%, 100%': {
+                                transform: 'scale(1)',
+                                opacity: 0.5,
+                              },
+                              '50%': {
+                                transform: 'scale(1.1)',
+                                opacity: 0.8,
+                              },
+                            },
+                          }}
+                        />
+                        <IconButton
+                          href={info.link}
+                          target="_blank"
+                          sx={{
+                            fontSize: '2.2rem',
+                            background: 'linear-gradient(135deg, #ffffff 0%, #f8fafc 100%)',
+                            color: '#1e293b',
+                            borderRadius: '16px',
+                            p: 2,
+                            boxShadow: '0 4px 12px rgba(0, 0, 0, 0.1)',
+                            border: '2px solid #e2e8f0',
+                            transition: 'all 0.3s cubic-bezier(0.4, 0, 0.2, 1)',
+                            '&:hover': {
+                              transform: 'scale(1.15) rotate(5deg)',
+                              boxShadow: '0 8px 25px rgba(0, 0, 0, 0.15)',
+                              background: 'linear-gradient(135deg, #1e293b 0%, #334155 100%)',
+                              color: '#ffffff',
+                              border: '2px solid #1e293b',
+                            },
+                          }}
+                        >
+                          {info.icon}
+                        </IconButton>
+                      </Box>
+                      <Box sx={{ flex: 1 }}>
+                        <Typography 
+                          variant="h6" 
+                          fontWeight={700} 
+                          mb={1} 
+                          color="primary"
+                          sx={{
+                            fontSize: '1.1rem',
+                            letterSpacing: '0.5px',
+                            textTransform: 'uppercase',
+                          }}
+                        >
+                          {info.label}
+                        </Typography>
+                        <Typography 
+                          variant="body1" 
+                          color="text.secondary" 
+                          sx={{ 
+                            wordBreak: 'break-word',
+                            fontSize: '1rem',
+                            lineHeight: 1.5,
+                            fontWeight: 500,
+                            opacity: 0.8,
+                          }}
+                        >
+                          {info.value}
+                        </Typography>
+                      </Box>
+                      <Box
+                        className="click-text"
+                        sx={{
+                          opacity: 0,
+                          transform: 'translateX(10px)',
+                          transition: 'all 0.3s ease-in-out',
+                        }}
+                      >
+                        <Typography
+                          variant="caption"
+                          sx={{
+                            color: 'primary.main',
+                            fontWeight: 600,
+                            fontSize: '0.8rem',
+                            textTransform: 'uppercase',
+                            letterSpacing: '1px',
+                          }}
+                        >
+                          Click
+                        </Typography>
+                      </Box>
+                    </CardContent>
+                  </Card>
+                </FadeInItem>
+              ))}
+            </Stack>
+          </Box>
+
+          {/* Right - Form */}
+          <Box
+            sx={{
+              display: 'flex',
+              flexDirection: 'column',
+              alignItems: 'center',
+              width: { xs: '100%', lg: '50%' },
+              minWidth: { xs: '100%', lg: '500px' },
+            }}
+          >
+            <Box display="flex" alignItems="center" flexDirection={{ xs: 'column', lg: 'column' }} mb={4}>
+              <ContactMailIcon 
+                sx={{ 
+                  fontSize: '6.2rem', 
+                  color: 'primary.main', 
+                  opacity: 0.9,
+                  animation: 'float 3s ease-in-out infinite, pulse 2s ease-in-out infinite',
+                  '@keyframes float': {
+                    '0%, 100%': { transform: 'translateY(0px)' },
+                    '50%': { transform: 'translateY(-10px)' },
+                  },
+                  '@keyframes pulse': {
+                    '0%, 100%': { 
+                      filter: 'drop-shadow(0 0 0 rgba(37, 99, 235, 0))',
+                      transform: 'scale(1)',
+                    },
+                    '50%': { 
+                      filter: 'drop-shadow(0 0 20px rgba(37, 99, 235, 0.3))',
+                      transform: 'scale(1.05)',
+                    },
+                  },
+                  transition: 'all 0.3s ease-in-out',
+                  '&:hover': {
+                    transform: 'scale(1.1) rotate(5deg)',
+                    filter: 'drop-shadow(0 0 25px rgba(37, 99, 235, 0.4))',
+                  },
+                }} 
+              />
+              <Typography 
+                variant="h4" 
+                color="primary" 
+                fontWeight={600}
+                sx={{
+                  mt: 2,
+                  animation: 'slideInUp 0.8s ease-out',
+                  '@keyframes slideInUp': {
+                    '0%': {
+                      opacity: 0,
+                      transform: 'translateY(20px)',
+                    },
+                    '100%': {
+                      opacity: 1,
+                      transform: 'translateY(0px)',
+                    },
+                  },
+                }}
+              >
+                Let's Connect!
+              </Typography>
+            </Box>
+
+            <Paper
+              elevation={4}
+              sx={{
+                p: { xs: 4, md: 5 },
+                borderRadius: 4,
+                width: '100%',
+                maxWidth: '600px',
+                background: 'rgba(255, 255, 255, 0.95)',
+                border: '1px solid rgba(37, 99, 235, 0.1)',
+                backdropFilter: 'blur(10px)',
+              }}
+            >
+              <Typography variant="h5" color="primary" fontWeight={600} mb={4} textAlign="center">
+                Send Me a Message
+              </Typography>
+              <Box
+                component="form"
+                action="mailto:abdullahmasood163@gmail.com"
+                method="POST"
+                encType="text/plain"
+                sx={{ width: '100%' }}
+              >
+                <Stack spacing={3}>
+                  <Grid >
+                    <Grid item xs={12} sm={6}>
+                      <Box sx={inputContainerStyles}>
+                        <label style={labelStyles}>Full Name</label>
+                        <input
+                          type="text"
+                          name="name"
+                          required
+                          placeholder="John Doe"
+                          style={inputStyles}
+                          onMouseEnter={handleInputHover}
+                          onMouseLeave={handleInputLeave}
+                          onFocus={handleInputFocus}
+                          onBlur={handleInputBlur}
+                        />
+                      </Box>
+                    </Grid>
+                    <Grid item xs={12} sm={6}>
+                      <Box sx={inputContainerStyles}>
+                        <label style={labelStyles}>Email Address</label>
+                        <input
+                          type="email"
+                          name="email"
+                          required
+                          placeholder="john@example.com"
+                          style={inputStyles}
+                          onMouseEnter={handleInputHover}
+                          onMouseLeave={handleInputLeave}
+                          onFocus={handleInputFocus}
+                          onBlur={handleInputBlur}
+                        />
+                      </Box>
+                    </Grid>
+                    <Grid item xs={12} sm={6}>
+                    <Box sx={inputContainerStyles}>
+                    <label style={labelStyles}>Subject</label>
+                    <input
+                      type="text"
+                      name="subject"
+                      required
+                      placeholder="Say hello or ask a question"
+                      style={inputStyles}
+                      onMouseEnter={handleInputHover}
+                      onMouseLeave={handleInputLeave}
+                      onFocus={handleInputFocus}
+                      onBlur={handleInputBlur}
+                    />
+                  </Box>
+
+                
+                    </Grid>
+                    <Grid item xs={12} sm={6}>
+                    <Box sx={inputContainerStyles}>
+                    <label style={labelStyles}>Your Message</label>
+                    <textarea
+                      name="message"
+                      required
+                      rows={6}
+                      placeholder="Type your message here..."
+                      style={{
+                        ...inputStyles,
+                        resize: 'vertical',
+                        minHeight: '120px',
+                        lineHeight: 1.6,
+                        fontFamily: 'inherit',
+                      }}
+                      onMouseEnter={handleInputHover}
+                      onMouseLeave={handleInputLeave}
+                      onFocus={handleInputFocus}
+                      onBlur={handleInputBlur}
+                    />
+                  </Box>
+                    </Grid>
+                  </Grid>
+
+                 
+
+                  <Button
+                    variant="contained"
+                    type="submit"
+                    color="primary"
+                    size="large"
+                    sx={{
+                      borderRadius: 3,
+                      fontWeight: 600,
+                      py: 2,
+                      fontSize: '1.1rem',
+                      boxShadow: '0 4px 12px rgba(37,99,235,0.2)',
+                      transition: 'all 0.3s ease-in-out',
+                      '&:hover': {
+                        background: '#1741a6',
+                        transform: 'translateY(-2px)',
+                        boxShadow: '0 6px 20px rgba(37,99,235,0.3)',
+                      },
+                    }}
+                  >
+                    Send Message
+                  </Button>
+                </Stack>
+              </Box>
+            </Paper>
+          </Box>
+        </Box>
+      </Container>
+    </Box>
+  );
+};
+
+export default Contact;
