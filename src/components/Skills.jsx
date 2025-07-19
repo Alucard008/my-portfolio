@@ -73,8 +73,8 @@ const SkillBar = ({ name, icon, level, index }) => {
 const Skills = () => {
   return (
     <FadeInSection>
-      <Box id="skills" sx={{ py: { xs: 10, md: 14 }, backgroundColor: '#fff' }}>
-        <Container style={{maxWidth: '100%'}}>
+      <Box id="skills" sx={{ py: { xs: 8, md: 12 }, backgroundColor: '#fff' }}>
+        <Container maxWidth="xl" sx={{ px: { xs: 2, sm: 3, md: 4 } }}>
           <Box textAlign="center" mb={6}>
             <Typography variant="h4" color="primary" gutterBottom>
               Skills
@@ -83,19 +83,21 @@ const Skills = () => {
               A comprehensive overview of my technical expertise and proficiency levels across various domains, including programming languages, web development, artificial intelligence, and other technologies.
             </Typography>
           </Box>
-          <Grid container spacing={4} justifyContent="center">
+          <Grid container spacing={3} justifyContent="center">
             {Object.entries(skillsData).map(([category, items], index) => (
               <Grid item xs={12} sm={6} md={4} lg={3} key={category}>
                 <FadeInItem delay={index * 0.1}>
                   <Paper
                     elevation={3}
                     sx={{
-                      p: 4,
+                      p: { xs: 3, md: 4 },
                       borderRadius: 3,
                       backgroundColor: '#f8fafc',
-                      height: '500px',
+                      height: { xs: 'auto', md: '500px' },
+                      minHeight: { xs: '400px', md: '500px' },
                       display: 'flex',
-                      width: '400px',
+                      width: '100%',
+                      maxWidth: { xs: '100%', md: '400px' },
                       flexDirection: 'column',
                       border: '1px solid #e2e8f0',
                       transition: 'all 0.3s ease-in-out',

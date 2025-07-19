@@ -6,6 +6,7 @@ import {
   Card,
   CardContent,
   Stack,
+  Container,
 } from '@mui/material';
 import SchoolIcon from '@mui/icons-material/School';
 import FadeInItem from './FadeInItem';
@@ -23,8 +24,8 @@ const Education = () => {
   };
 
   return (
-    <Box id="education">
-      <Box margin={10}>
+    <Box id="education" sx={{ py: { xs: 8, md: 12 } }}>
+      <Container maxWidth="lg" sx={{ px: { xs: 2, sm: 3, md: 4 } }}>
         <Box textAlign="center" mb={6}>
           <Typography variant="h4" color="primary" gutterBottom>
             Education
@@ -147,7 +148,7 @@ const Education = () => {
             </Grid>
           ))}
         </Grid>
-      </Box>
+      </Container>
     </Box>
   );
 };

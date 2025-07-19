@@ -69,7 +69,7 @@ const Projects = () => {
         background: 'linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%)',
       }}
     >
-      <Container style={{ maxWidth: '100%' }}>
+      <Container maxWidth="xl" sx={{ px: { xs: 2, sm: 3, md: 4 } }}>
         <Box textAlign="center" mb={8}>
           <Typography
             variant="h3"
@@ -113,13 +113,13 @@ const Projects = () => {
             }}
           >
             <Stack direction="row" spacing={1} flexWrap="wrap">
-              {filters.map(({ label, value, icon }) => (
-                <Chip
-                  key={value}
-                  label={label}
-                  icon={icon}
-                  color={filter === value ? 'primary' : 'default'}
-                  onClick={() => setFilter(value)}
+          {filters.map(({ label, value, icon }) => (
+            <Chip
+              key={value}
+              label={label}
+              icon={icon}
+              color={filter === value ? 'primary' : 'default'}
+              onClick={() => setFilter(value)}
                   sx={{
                     px: 2,
                     fontWeight: 600,
@@ -136,25 +136,13 @@ const Projects = () => {
                       boxShadow: '0 4px 12px rgba(37, 99, 235, 0.3)',
                     },
                   }}
-                />
-              ))}
-            </Stack>
+            />
+          ))}
+        </Stack>
           </Paper>
         </Box>
 
-        <Box
-          display="flex"
-          flexWrap="wrap"
-          gap={3}
-          justifyContent="center"
-          alignItems="stretch"
-          sx={{
-            display: 'flex',
-            flexWrap: 'wrap',
-            gap: 3,
-            justifyContent: 'center',
-          }}
-        >
+        <Grid container spacing={3} justifyContent="center" alignItems="stretch">
           {filteredProjects.map((project, idx) => (
             <Grid
               item
@@ -164,28 +152,28 @@ const Projects = () => {
               lg={4}
               xl={4}
               key={idx}
-              sx={{ display: 'flex', height: '100%' }}
+              sx={{ display: 'flex', minHeight: { xs: 'auto', md: '520px' } }}
             >
               <FadeInItem delay={0.1 * idx}>
                 <Card
-                  elevation={0}
-                  onMouseEnter={() => handleCardHover(idx)}
-                  onMouseLeave={handleCardLeave}
+                    elevation={0}
+                    onMouseEnter={() => handleCardHover(idx)}
+                    onMouseLeave={handleCardLeave}
                   sx={{
-                    width: '500px',
-                    borderRadius: '20px',
-                    background:
-                      'linear-gradient(135deg, rgba(255, 255, 255, 0.9) 0%, rgba(248, 250, 252, 0.9) 100%)',
-                    border: '2px solid rgba(37, 99, 235, 0.08)',
-                    backdropFilter: 'blur(10px)',
-                    transition: 'all 0.4s cubic-bezier(0.4, 0, 0.2, 1)',
-                    cursor: 'pointer',
-                    position: 'relative',
-                    overflow: 'hidden',
+                      width: '100%',
+                      borderRadius: '20px',
+                      background:
+                        'linear-gradient(135deg, rgba(255, 255, 255, 0.9) 0%, rgba(248, 250, 252, 0.9) 100%)',
+                      border: '2px solid rgba(37, 99, 235, 0.08)',
+                      backdropFilter: 'blur(10px)',
+                      transition: 'all 0.4s cubic-bezier(0.4, 0, 0.2, 1)',
+                      cursor: 'pointer',
+                      position: 'relative',
+                      overflow: 'hidden',
                     display: 'flex',
                     flexDirection: 'column',
-                    height: '500px',
-                    minHeight: '520px',
+                      height: { xs: 'auto', md: '500px' },
+                      minHeight: { xs: 'auto', md: '520px' },
                     '&::before': {
                       content: '""',
                       position: 'absolute',
@@ -238,12 +226,12 @@ const Projects = () => {
                             border: '4px solid rgba(37, 99, 235, 0.3)',
                             boxShadow: '0 12px 40px rgba(37, 99, 235, 0.2)',
                           },
-                        }}
-                      >
-                        <CardMedia
-                          component="img"
-                          image={project.image}
-                          alt={project.title}
+                  }}
+                >
+                  <CardMedia
+                    component="img"
+                    image={project.image}
+                    alt={project.title}
                           sx={{
                             width: '100%',
                             height: '100%',
@@ -445,7 +433,7 @@ const Projects = () => {
 
                     <Box sx={{ mt: 'auto' }}>
                       <Stack direction="row" spacing={1} flexWrap="wrap" mb={2}>
-                        {project.tech.map((tech, i) => (
+                      {project.tech.map((tech, i) => (
                           <Chip
                             label={tech}
                             key={i}
@@ -464,15 +452,15 @@ const Projects = () => {
                               },
                             }}
                           />
-                        ))}
-                      </Stack>
+                      ))}
+                    </Stack>
                     </Box>
                   </CardContent>
                 </Card>
               </FadeInItem>
             </Grid>
           ))}
-        </Box>
+        </Grid>
       </Container>
 
       {/* Video Modal */}

@@ -116,19 +116,19 @@ const Contact = () => {
   };
 
   return (
-    <Box id="contact" sx={{ py: { xs: 12, md: 16 }, minHeight: '100vh', display: 'flex', alignItems: 'center' }}>
-      <Container sx={{ maxWidth: '100%', background: 'linear-gradient(135deg, #e3f2fd 0%, #f3e5f5 100%)', py: { xs: 4, md: 8 } }}>
-        <Box
-          sx={{
-            display: 'flex',
-            flexDirection: { xs: 'column', lg: 'row' },
-            alignItems: 'flex-start',
-            justifyContent: 'space-between',
-            gap: { xs: 4, lg: 8 },
-            maxWidth: '1400px',
-            mx: 'auto',
-          }}
-        >
+    <Box id="contact" sx={{ py: { xs: 8, md: 12 }, minHeight: { xs: 'auto', md: '100vh' }, display: 'flex', alignItems: 'center' }}>
+      <Container maxWidth="xl" sx={{ px: { xs: 2, sm: 3, md: 4 }, background: 'linear-gradient(135deg, #e3f2fd 0%, #f3e5f5 100%)', py: { xs: 4, md: 8 } }}>
+                  <Box
+            sx={{
+              display: 'flex',
+              flexDirection: { xs: 'column', lg: 'row' },
+              alignItems: { xs: 'center', lg: 'flex-start' },
+              justifyContent: 'space-between',
+              gap: { xs: 4, lg: 8 },
+              maxWidth: '1400px',
+              mx: 'auto',
+            }}
+          >
           {/* Left - Info Cards */}
           <Box
             sx={{
@@ -140,10 +140,10 @@ const Contact = () => {
             }}
           >
             <Box textAlign="center" mb={6} sx={{ width: '100%' }}>
-              <Typography variant="h3" color="primary" sx={{ fontWeight: 400, mb: 2, fontSize: { xs: '2rem', md: '2.5rem' } }}>
+              <Typography variant="h3" color="primary" sx={{ fontWeight: 400, mb: 2, fontSize: { xs: '1.8rem', sm: '2rem', md: '2.5rem' } }}>
                 Get in Touch
               </Typography>
-              <Typography variant="h6" color="text.secondary" sx={{ lineHeight: 1.6 , textAlign: 'center' }}>
+              <Typography variant="h6" color="text.secondary" sx={{ lineHeight: 1.6, textAlign: 'center', fontSize: { xs: '0.9rem', md: '1rem' } }}>
                 Feel free to reach out for collaborations, job opportunities, or just a friendly chat.
               </Typography>
             </Box>

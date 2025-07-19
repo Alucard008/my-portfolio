@@ -62,20 +62,21 @@ const Header = () => {
 
   return (
     <>
-      <AppBar position="fixed" sx={{ backgroundColor: 'rgba(15, 23, 42, 0.95)' }}>
-        <Toolbar sx={{ justifyContent: 'space-between' }}>
-          <Typography
-            variant="h6"
-            component="a"
-            href="#home"
-            sx={{
-              color: '#2563eb',
-              textDecoration: 'none',
-              fontWeight: 'bold',
-            }}
-          >
-            Abdullah<span style={{ color: '#2563eb' }}> Bin Masood</span>
-          </Typography>
+      <AppBar position="fixed" sx={{ backgroundColor: 'rgba(15, 23, 42, 0.95)', backdropFilter: 'blur(10px)' }}>
+        <Toolbar sx={{ justifyContent: 'space-between', px: { xs: 2, sm: 3 } }}>
+                      <Typography
+              variant="h6"
+              component="a"
+              href="#home"
+              sx={{
+                color: '#2563eb',
+                textDecoration: 'none',
+                fontWeight: 'bold',
+                fontSize: { xs: '1rem', sm: '1.25rem' },
+              }}
+            >
+              Abdullah<span style={{ color: '#2563eb' }}> Bin Masood</span>
+            </Typography>
 
           {isMobile ? (
             <>
