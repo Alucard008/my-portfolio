@@ -112,7 +112,13 @@ const Projects = () => {
               border: '1px solid rgba(37, 99, 235, 0.1)',
             }}
           >
-            <Stack direction="row" spacing={1} flexWrap="wrap">
+           <Stack
+  direction={{ xs: 'column', sm: 'row' }}
+  spacing={1}
+  flexWrap="wrap"
+  alignItems="center"
+  justifyContent="center"
+>
           {filters.map(({ label, value, icon }) => (
             <Chip
               key={value}
@@ -201,7 +207,8 @@ const Projects = () => {
                   <Box
                     sx={{
                       position: 'relative',
-                      height: '300px',
+                      height: { xs: '150px', sm: '200px', md: '300px' },
+
                       overflow: 'hidden',
                       display: 'flex',
                       alignItems: 'center',
