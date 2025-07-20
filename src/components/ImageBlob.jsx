@@ -1,5 +1,5 @@
 // import { useState } from 'react';
-import { Box, Typography, useTheme } from '@mui/material';
+import { Box, Typography } from '@mui/material';
 import FadeInItem from './FadeInItem';
 import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
 
