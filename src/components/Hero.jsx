@@ -70,7 +70,7 @@ const Hero = () => {
       sx={{
         position: 'relative',
         height: '100vh',
-        minHeight: '100vh',
+        minHeight: {xs:'160vh',md:'100vh'},
         width: '100%',
         overflow: 'hidden',
         display: 'flex',
@@ -89,6 +89,9 @@ const Hero = () => {
           zIndex: 0,
           overflow: 'hidden',
           pointerEvents: 'none',
+          display:'flex',
+          alignItems:'center',
+          justifyContent:'center',
         }}
       >
         <video
@@ -141,7 +144,7 @@ const Hero = () => {
         <Stack
           direction={{ xs: 'column', lg: 'row' }}
           spacing={{ xs: 4, md: 6, lg: 8 }}
-          alignItems="flex-start"
+          alignItems={{xs:"center",lg:"flex-start"}}
           justifyContent="center"
           sx={{ minHeight: { xs: '80vh', md: '70vh' }, mt: { xs: 4, md: 8 } }}
         >
