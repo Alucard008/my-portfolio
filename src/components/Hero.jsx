@@ -46,44 +46,104 @@ const Hero = () => {
   // Cycle through messages every 3 seconds when hovered
   useEffect(() => {
     if (!isHovered) return;
-
+  
     const interval = setInterval(() => {
       setMessageVisible(false);
-
+  
       setTimeout(() => {
         if (messageIndex < messages.length - 1) {
           setMessageIndex((prev) => prev + 1);
           setMessageVisible(true);
         } else {
-          // Hide cloud after "Enjoy your visit!" message
-          setTimeout(() => {
-            setShowCloud(false);
-          }, 2000); // Show the final message for 2 seconds before hiding
+          setShowCloud(false);  // Immediately hide cloud
+          clearInterval(interval); // stop the interval
         }
-      }, 300); // Wait for fade out before changing message
+      }, 300);
     }, 3000);
-
+  
     return () => clearInterval(interval);
   }, [isHovered, messageIndex, messages.length]);
-
+  
   return (
     <Box
       id="home"
       sx={{
+        position: 'relative',
+        height: '100vh',
         minHeight: '100vh',
+        width: '100%',
+        overflow: 'hidden',
         display: 'flex',
         alignItems: 'center',
-        background: 'linear-gradient(135deg, #f4f6fb 0%, #e0e7ef 100%)',
-        py: { xs: 10, md: 15 },
+        justifyContent: 'center',
       }}
     >
-      <Container maxWidth="xl" sx={{ px: { xs: 2, sm: 3, md: 4 } }}>
+      {/* Background Video */}
+      <Box
+        sx={{
+          position: 'absolute',
+          top: 0,
+          left: 0,
+          width: '100%',
+          height: '100%',
+          zIndex: 0,
+          overflow: 'hidden',
+          pointerEvents: 'none',
+        }}
+      >
+        <video
+          autoPlay
+          loop
+          muted
+          playsInline
+          preload="auto"
+          style={{
+            width: '100%',
+            height: '100%',
+            objectFit: 'cover',
+            position: 'absolute',
+            top: 0,
+            left: 0,
+            zIndex: 0,
+          }}
+          src="/background.mp4"
+        />
+        {/* Video Overlay for readability */}
+        <Box
+          sx={{
+            position: 'absolute',
+            top: 0,
+            left: 0,
+            width: '100%',
+            height: '100%',
+            background: 'linear-gradient(135deg, rgba(20,30,48,0.45) 0%, rgba(36,37,42,0.35) 100%)',
+            zIndex: 1,
+          }}
+        />
+      </Box>
+
+      {/* Context Overlay above video, below content */}
+      <Box
+        sx={{
+          position: 'absolute',
+          top: 0,
+          left: 0,
+          width: '100%',
+          height: '100%',
+          zIndex: 2,
+          background: 'linear-gradient(120deg, rgba(30,41,59,0.38) 0%, rgba(30,41,59,0.32) 100%)',
+          pointerEvents: 'none',
+        }}
+      />
+
+      {/* Main Content (above overlays and video) */}
+      <Container maxWidth="xl" sx={{ position: 'relative', zIndex: 3 }}>
         <Stack
           direction={{ xs: 'column', lg: 'row' }}
           spacing={{ xs: 4, md: 6, lg: 8 }}
-          alignItems="center"
+          alignItems="flex-start"
           justifyContent="center"
-          sx={{ minHeight: { xs: '80vh', md: '70vh' } }}
+          sx={{ minHeight: { xs: '80vh', md: '70vh' }, mt: { xs: 4, md: 8 } }}
         >
           <FadeInItem delay={0.1}>
             <Box
@@ -93,43 +153,42 @@ const Hero = () => {
                 width: '100%',
               }}
             >
-              <Typography variant="h5" color="primary" gutterBottom>
+              <Typography variant="h5" sx={{ color: 'white', fontWeight: 600 }} gutterBottom>
                 Hello, I'm
               </Typography>
               <Typography
                 variant="h1"
                 sx={{
                   fontWeight: 'bold',
-                  background:
-                    'linear-gradient(135deg, #2563eb 0%, #2563eb 100%)',
-                  WebkitBackgroundClip: 'text',
-                  WebkitTextFillColor: 'transparent',
+                  color: 'white',
                   fontSize: {
                     xs: '2rem',
                     sm: '2.8rem',
                     md: '3.2rem',
                     lg: '3.5rem',
                   },
+                  textShadow: '0 2px 16px rgba(0,0,0,0.25)',
                 }}
               >
                 Abdullah Bin Masood
               </Typography>
               <Typography
                 variant="h5"
-                color="text.secondary"
-                sx={{ mt: 2, mb: 3 }}
+                sx={{ mt: 2, mb: 3, color: 'white', opacity: 0.92, textShadow: '0 2px 8px rgba(0,0,0,0.18)' }}
               >
                 AI Engineer / Full-Stack Developer
               </Typography>
               <Typography
                 variant="body1"
-                color="text.secondary"
                 sx={{
+                  color: 'white',
+                  opacity: 0.92,
                   mb: 4,
                   lineHeight: 1.6,
                   maxWidth: { xs: '100%', md: '600px', lg: '800px' },
                   fontSize: { xs: '0.9rem', md: '1rem' },
                   mx: { xs: 'auto', lg: 0 },
+                  textShadow: '0 2px 8px rgba(0,0,0,0.18)',
                 }}
               >
                 I am an AI Engineer with 4 years of practical experience in
@@ -148,12 +207,12 @@ const Hero = () => {
               >
                 <Button
                   variant="contained"
-                  color="primary"
+                  // color="primary"
                   href="/Abdullah_Masood_Resume_Updated_AI.pdf"
                   target="_blank"
                   download
                   size="medium"
-                  sx={{ fontSize: '1rem', px: 3, py: 1.2 }}
+                  sx={{ fontSize: '1rem', px: 3, py: 1.2 , backgroundColor:"#1DE782" , color:"black"}}
                 >
                   Download Resume
                 </Button>
@@ -161,7 +220,7 @@ const Hero = () => {
                   variant="outlined"
                   href="#contact"
                   size="medium"
-                  sx={{ fontSize: '1rem', px: 3, py: 1.2 }}
+                  sx={{ fontSize: '1rem', px: 3, py: 1.2  ,border:"1px solid #1DE782" , color:"#1DE782"}}
                 >
                   Contact Me
                 </Button>
@@ -174,32 +233,64 @@ const Hero = () => {
                 <IconButton
                   href="mailto:abdullahmasood163@gmail.com"
                   target="_blank"
-                  color="secondary"
-                  sx={{ fontSize: '1.2rem', p: 1.5 }}
+                  sx={{
+                    fontSize: '1.2rem',
+                    p: 1.5,
+                    color: '#1DE782',
+                    transition: 'box-shadow 0.3s, color 0.3s',
+                    '&:hover': {
+                      color: '#39FF14',
+                      boxShadow: '0 0 12px 2px #39FF14AA',
+                    },
+                  }}
                 >
                   <EmailIcon />
                 </IconButton>
                 <IconButton
                   href="tel:+33751479304"
                   target="_blank"
-                  color="secondary"
-                  sx={{ fontSize: '1.2rem', p: 1.5 }}
+                  sx={{
+                    fontSize: '1.2rem',
+                    p: 1.5,
+                    color: '#1DE782',
+                    transition: 'box-shadow 0.3s, color 0.3s',
+                    '&:hover': {
+                      color: '#39FF14',
+                      boxShadow: '0 0 12px 2px #39FF14AA',
+                    },
+                  }}
                 >
                   <PhoneIcon />
                 </IconButton>
                 <IconButton
                   href="https://linkedin.com/in/abdullah9202"
                   target="_blank"
-                  color="secondary"
-                  sx={{ fontSize: '1.2rem', p: 1.5 }}
+                  sx={{
+                    fontSize: '1.2rem',
+                    p: 1.5,
+                    color: '#1DE782',
+                    transition: 'box-shadow 0.3s, color 0.3s',
+                    '&:hover': {
+                      color: '#39FF14',
+                      boxShadow: '0 0 12px 2px #39FF14AA',
+                    },
+                  }}
                 >
                   <LinkedInIcon />
                 </IconButton>
                 <IconButton
                   href="https://github.com/Alucard008"
                   target="_blank"
-                  color="secondary"
-                  sx={{ fontSize: '1.2rem', p: 1.5 }}
+                  sx={{
+                    fontSize: '1.2rem',
+                    p: 1.5,
+                    color: '#1DE782',
+                    transition: 'box-shadow 0.3s, color 0.3s',
+                    '&:hover': {
+                      color: '#39FF14',
+                      boxShadow: '0 0 12px 2px #39FF14AA',
+                    },
+                  }}
                 >
                   <GitHubIcon />
                 </IconButton>
@@ -215,6 +306,8 @@ const Hero = () => {
             messageVisible={messageVisible}
             messageIndex={messageIndex}
             messages={messages}
+            
+            size={{ xs: 280, sm: 320, md: 360, lg: 420 }}
           />
         </Stack>
       </Container>

@@ -79,7 +79,7 @@ const Projects = () => {
               fontWeight: 700,
               mb: 3,
               fontSize: { xs: '2.5rem', md: '3rem' },
-              background: 'linear-gradient(135deg, #2563eb 0%, #1d4ed8 100%)',
+              background: "black",
               WebkitBackgroundClip: 'text',
               WebkitTextFillColor: 'transparent',
             }}
@@ -87,8 +87,8 @@ const Projects = () => {
             Projects
           </Typography>
           <Typography
-            variant="h6"
-            color="text.secondary"
+            variant="body1"
+            color="black"
             maxWidth="md"
             mx="auto"
             sx={{
@@ -124,22 +124,28 @@ const Projects = () => {
               key={value}
               label={label}
               icon={icon}
-              color={filter === value ? 'primary' : 'default'}
+              color={filter === value ? 'success' : 'default'}
               onClick={() => setFilter(value)}
                   sx={{
                     px: 2,
                     fontWeight: 600,
                     borderRadius: 2,
+                    fontSize: { xs: '0.95rem', sm: '1rem' },
+                   boxShadow: 'none',
+                   border: '2px solid #18181B',
+                   background: filter === value ? '#1DE782' : undefined,
+                   color: filter === value ? '#18181B' : undefined,
                     transition: 'all 0.3s ease-in-out',
                     '&:hover': {
                       transform: 'translateY(-2px)',
-                      boxShadow: '0 4px 12px rgba(37, 99, 235, 0.15)',
+                      background: '#18181B',
+                      color: '#1DE782',
+                      border: '2px solid #1DE782',
                     },
-                    '&.MuiChip-colorPrimary': {
-                      background:
-                        'linear-gradient(135deg, #2563eb 0%, #1d4ed8 100%)',
-                      color: 'white',
-                      boxShadow: '0 4px 12px rgba(37, 99, 235, 0.3)',
+                    '&.MuiChip-colorSuccess': {
+                      background: '#1DE782',
+                      color: '#18181B',
+                      border: '2px solid #18181B',
                     },
                   }}
             />
@@ -254,7 +260,7 @@ const Projects = () => {
                           height: 120,
                           borderRadius: '50%',
                           background:
-                            'linear-gradient(135deg, #3b82f6 0%, #1d4ed8 100%)',
+                            'linear-gradient(135deg, #1DE782 0%, #1DE782 100%)',
                           display: 'flex',
                           alignItems: 'center',
                           justifyContent: 'center',
@@ -284,7 +290,7 @@ const Projects = () => {
                           <CodeIcon
                             sx={{
                               fontSize: 30,
-                              color: '#2563eb',
+                              color: 'black',
                               transition: 'all 0.3s ease-in-out',
                             }}
                           />
@@ -384,7 +390,14 @@ const Projects = () => {
                       fontWeight={700}
                       gutterBottom
                       sx={{
-                        color: 'primary.main',
+                        color: 'black',
+                        backgroundColor:"#1DE782",
+                        height:"50px",
+                        width:"auto",
+                        display:"flex",
+                        alignItems:"center",
+                        justifyContent:"center",
+                        padding:"10px",
                         mb: 2,
                         textAlign: 'center',
                         fontSize: '1.25rem',
@@ -403,9 +416,9 @@ const Projects = () => {
                         project.description.map((line, i) => (
                           <Typography
                             variant="body2"
-                            color="text.secondary"
+                            sx={{ color: '#18181B' }}
                             key={i}
-                            sx={{
+                            style={{
                               lineHeight: 1.5,
                               mb: 0.8,
                               fontSize: '0.875rem',
@@ -422,8 +435,8 @@ const Projects = () => {
                       ) : (
                         <Typography
                           variant="body2"
-                          color="text.secondary"
-                          sx={{
+                          sx={{ color: '#18181B' }}
+                          style={{
                             lineHeight: 1.5,
                             fontSize: '0.875rem',
                             transition: 'all 0.3s ease-in-out',
@@ -446,15 +459,18 @@ const Projects = () => {
                             key={i}
                             size="small"
                             sx={{
-                              background: 'rgba(37, 99, 235, 0.1)',
-                              color: 'primary.main',
+                              background: '#1DE782',
+                              color: '#18181B',
                               fontWeight: 600,
                               fontSize: '0.75rem',
                               borderRadius: 2,
                               height: '24px',
+                              border: '2px solid #18181B',
                               transition: 'all 0.3s ease-in-out',
                               '&:hover': {
-                                background: 'rgba(37, 99, 235, 0.2)',
+                                background: '#18181B',
+                                color: '#1DE782',
+                                border: '2px solid #1DE782',
                                 transform: 'scale(1.05)',
                               },
                             }}

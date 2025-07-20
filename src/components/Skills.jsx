@@ -43,9 +43,9 @@ const SkillBar = ({ name, icon, level, index }) => {
           >
             {icon}
           </Box>
-          <Typography fontWeight={500}>{name}</Typography>
+          <Typography fontWeight={500} sx={{ color: '#18181B' }}>{name}</Typography>
         </Stack>
-        <Typography variant="body2" color="text.secondary">
+        <Typography variant="body2" sx={{ color: '#18181B' }}>
           {animatedLevel}%
         </Typography>
       </Stack>
@@ -58,11 +58,10 @@ const SkillBar = ({ name, icon, level, index }) => {
           backgroundColor: '#e0e7ef',
           transition: 'all 0.8s ease-in-out',
           '& .MuiLinearProgress-bar': {
-            backgroundColor: '#2563eb',
-            transition: 'transform 0.8s ease-in-out',
             background: isHovered 
-              ? 'linear-gradient(90deg, #2563eb 0%, #3b82f6 50%, #2563eb 100%)'
-              : '#2563eb',
+              ? 'linear-gradient(90deg, #6366F1 0%, #6366F1 100%)'
+              : '#1DE782',
+            transition: 'transform 0.8s ease-in-out',
           },
         }}
       />
@@ -76,10 +75,10 @@ const Skills = () => {
       <Box id="skills" sx={{ py: { xs: 8, md: 12 }, backgroundColor: '#fff' }}>
         <Container maxWidth="xl" sx={{ px: { xs: 2, sm: 3, md: 4 } }}>
           <Box textAlign="center" mb={6}>
-            <Typography variant="h4" color="primary" gutterBottom>
+            <Typography variant="h4" sx={{ color: '#18181B', fontWeight: 700 }} gutterBottom>
               Skills
             </Typography>
-            <Typography variant="body1" color="text.secondary" maxWidth="md" mx="auto">
+            <Typography variant="body1" sx={{ color: '#18181B' }} maxWidth="md" mx="auto">
               A comprehensive overview of my technical expertise and proficiency levels across various domains, including programming languages, web development, artificial intelligence, and other technologies.
             </Typography>
           </Box>
@@ -104,11 +103,11 @@ const Skills = () => {
                       '&:hover': {
                         transform: 'translateY(-8px)',
                         boxShadow: '0 12px 30px rgba(0,0,0,0.15)',
-                        borderColor: '#2563eb',
+                        borderColor: '#1DE782',
                       },
                     }}
                   >
-                    <Typography variant="h6" color="primary" mb={3} fontWeight={600} textAlign="center">
+                    <Typography variant="h6" sx={{ color: '#18181B', mb: 3, fontWeight: 600, textAlign: 'center' }}>
                       {category}
                     </Typography>
                     <Box sx={{ flex: 1, overflow: 'hidden' }}>

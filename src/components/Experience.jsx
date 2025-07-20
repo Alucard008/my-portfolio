@@ -30,10 +30,10 @@ const Experience = () => {
   };
 
   return (
-    <Box id="experience" sx={{ py: { xs: 8, md: 12 } }}>
+    <Box id="experience" sx={{ py: { xs: 8, md: 12 }, backgroundColor: '#18181B' }}>
       <Container maxWidth="lg" sx={{ px: { xs: 2, sm: 3, md: 4 } }}>
         <Box textAlign="center" mb={6}>
-          <Typography variant="h4" color="primary" gutterBottom>
+          <Typography variant="h4" sx={{ color: '#1DE782', fontWeight: 700 }} gutterBottom>
             Experience
           </Typography>
         </Box>
@@ -51,9 +51,12 @@ const Experience = () => {
                   width: '100%',
                   cursor: 'pointer',
                   transition: 'all 0.6s cubic-bezier(0.4, 0, 0.2, 1)',
+                  backgroundColor: '#232336',
+                  color: '#fff',
+                  border: '1.5px solid #6366F1',
                   '&:hover': {
-                    boxShadow: '0 20px 40px rgba(37, 99, 235, 0.2)',
-                    border: '2px solid #2563eb',
+                    boxShadow: '0 20px 40px #6366F144',
+                    border: '2px solid #6366F1',
                     transform: 'translateY(-8px) scale(1.02)',
                   },
                 }}
@@ -61,10 +64,11 @@ const Experience = () => {
                 <CardContent sx={{ p: 3 }}>
                   <Box sx={{ display: 'flex', alignItems: 'center', mb: 2 }}>
                     <WorkIcon 
-                      color="primary"
                       sx={{
                         fontSize: '1.5rem',
                         mr: 2,
+                        color: '#1DE782',
+                        textShadow: '0 0 8px #1DE78299',
                         transition: 'all 0.4s ease-in-out',
                         transform: hoveredCard === idx ? 'rotate(360deg) scale(1.2)' : 'rotate(0deg) scale(1)',
                       }}
@@ -75,15 +79,15 @@ const Experience = () => {
                         fontWeight={600}
                         sx={{
                           transition: 'all 0.4s ease-in-out',
-                          color: hoveredCard === idx ? '#2563eb' : 'inherit',
+                          color: hoveredCard === idx ? '#6366F1' : '#fff',
                         }}
                       >
                         {exp.title}
                       </Typography>
                       <Typography 
                         variant="subtitle2" 
-                        color="text.secondary"
                         sx={{
+                          color: '#A3A3A3',
                           transition: 'all 0.4s ease-in-out',
                         }}
                       >
@@ -93,9 +97,9 @@ const Experience = () => {
                   </Box>
                   <Typography 
                     variant="body2" 
-                    color="text.secondary" 
-                    mb={2}
                     sx={{
+                      color: '#A3A3A3',
+                      mb: 2,
                       transition: 'all 0.4s ease-in-out',
                     }}
                   >
@@ -113,7 +117,7 @@ const Experience = () => {
                       <li key={i}>
                         <Typography 
                           variant="body2" 
-                          color="text.secondary"
+                          style={{ color: '#E5E5E5' }}
                           sx={{
                             transition: 'all 0.4s ease-in-out',
                             mb: 0.5,
@@ -137,8 +141,10 @@ const Experience = () => {
               <TimelineItem key={idx} position={idx % 2 === 0 ? 'left' : 'right'} style={{display: 'flex', gap: '1rem'}}>
                 <TimelineSeparator>
                   <TimelineDot 
-                    color="primary"
                     sx={{
+                      background: '#232336',
+                      border: '2.5px solid #1DE782',
+                      boxShadow: '0 0 12px #1DE78299',
                       transition: 'all 0.4s ease-in-out',
                       transform: hoveredCard === idx ? 'scale(1.3) rotate(360deg)' : 'scale(1) rotate(0deg)',
                     }}
@@ -146,6 +152,8 @@ const Experience = () => {
                     <WorkIcon 
                       sx={{
                         fontSize: hoveredCard === idx ? '1.2rem' : '1rem',
+                        color: '#1DE782',
+                        textShadow: '0 0 8px #1DE78299',
                         transition: 'all 0.4s ease-in-out',
                       }}
                     />
@@ -154,7 +162,7 @@ const Experience = () => {
                     <TimelineConnector 
                       sx={{
                         transition: 'all 0.4s ease-in-out',
-                        backgroundColor: hoveredCard === idx ? '#2563eb' : '#e0e7ef',
+                        backgroundColor: hoveredCard === idx ? '#6366F1' : '#e0e7ef',
                         height: hoveredCard === idx ? '60px' : '40px',
                       }}
                     />
@@ -185,11 +193,15 @@ const Experience = () => {
                           minWidth: 320, 
                           maxWidth: 460, 
                           mb: 2,
+                          padding:"10px",
                           cursor: 'pointer',
                           transition: 'all 0.6s cubic-bezier(0.4, 0, 0.2, 1)',
+                          backgroundColor: '#232336',
+                          color: '#fff',
+                          border: '1.5px solid #1DE782',
                           '&:hover': {
-                            boxShadow: '0 20px 40px rgba(37, 99, 235, 0.2)',
-                            border: '2px solid #2563eb',
+                            boxShadow: '0 20px 40px #6366F144',
+                            border: '2px solid #6366F1',
                           },
                         }}
                       >
@@ -199,7 +211,7 @@ const Experience = () => {
                             fontWeight={600}
                             sx={{
                               transition: 'all 0.4s ease-in-out',
-                              color: hoveredCard === idx ? '#2563eb' : 'inherit',
+                              color: hoveredCard === idx ? '#6366F1' : '#fff',
                               transform: hoveredCard === idx ? 'translateY(-5px)' : 'translateY(0)',
                             }}
                           >
@@ -207,9 +219,8 @@ const Experience = () => {
                           </Typography>
                           <Typography 
                             variant="subtitle2" 
-                            color="text.secondary"
-                            sx={{
-                              transition: 'all 0.4s ease-in-out',
+                            sx={{ color: '#A3A3A3', transition: 'all 0.4s ease-in-out' }}
+                            style={{
                               transform: hoveredCard === idx ? 'translateY(-3px)' : 'translateY(0)',
                             }}
                           >
@@ -217,10 +228,9 @@ const Experience = () => {
                           </Typography>
                           <Typography 
                             variant="body2" 
-                            color="text.secondary" 
+                            sx={{ color: '#A3A3A3', transition: 'all 0.4s ease-in-out' }}
                             mb={1}
-                            sx={{
-                              transition: 'all 0.4s ease-in-out',
+                            style={{
                               transform: hoveredCard === idx ? 'translateY(-3px)' : 'translateY(0)',
                             }}
                           >
@@ -239,9 +249,8 @@ const Experience = () => {
                               <li key={i}>
                                 <Typography 
                                   variant="body2" 
-                                  color="text.secondary"
-                                  sx={{
-                                    transition: 'all 0.4s ease-in-out',
+                                  sx={{ color: '#E5E5E5', transition: 'all 0.4s ease-in-out' }}
+                                  style={{
                                     transform: hoveredCard === idx ? 'translateY(-2px)' : 'translateY(0)',
                                   }}
                                 >

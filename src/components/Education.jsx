@@ -24,10 +24,10 @@ const Education = () => {
   };
 
   return (
-    <Box id="education" sx={{ py: { xs: 8, md: 12 } }}>
-      <Container maxWidth="lg" sx={{ px: { xs: 2, sm: 3, md: 4 } }}>
+    <Box id="education" sx={{ py: { xs: 8, md: 12 }, backgroundColor: '#18181B' }}>
+      <Container maxWidth="xl" sx={{ px: { xs: 2, sm: 3, md: 4 } }}>
         <Box textAlign="center" mb={6}>
-          <Typography variant="h4" color="primary" gutterBottom>
+          <Typography variant="h4" sx={{ color: '#1DE782', fontWeight: 700 }} gutterBottom>
             Education
           </Typography>
         </Box>
@@ -58,12 +58,16 @@ const Education = () => {
                       gap: "3rem",
                       height: '100%',
                       cursor: 'pointer',
+                      padding:"10px",
                       transition: 'all 0.6s cubic-bezier(0.4, 0, 0.2, 1)',
                       transform: hoveredCard === idx ? 'scale(1.05)' : 'scale(1)',
+                      backgroundColor: '#fff',
+                      color: '#18181B',
+                      border: '2px solid #18181B',
                       '&:hover': {
                         transform: 'scale(1.05)',
                         boxShadow: '0 20px 40px rgba(37, 99, 235, 0.2)',
-                        border: '2px solid #2563eb',
+                        border: '2px solid #1DE782',
                       },
                     }}
                   >
@@ -85,9 +89,9 @@ const Education = () => {
                           }}
                         >
                           <SchoolIcon 
-                            color="primary" 
                             sx={{
                               fontSize: hoveredCard === idx ? '2rem' : '1.5rem',
+                              color: '#1DE782',
                               transition: 'all 0.4s ease-in-out',
                             }}
                           />
@@ -103,15 +107,15 @@ const Education = () => {
                             fontWeight={600}
                             sx={{
                               transition: 'all 0.4s ease-in-out',
-                              color: hoveredCard === idx ? '#2563eb' : 'inherit',
+                              color: hoveredCard === idx ? '#1DE782' : 'black',
                             }}
                           >
                             {edu.degree}
                           </Typography>
                           <Typography 
                             variant="subtitle2" 
-                            color="text.secondary"
                             sx={{
+                              color: '#18181B',
                               transition: 'all 0.4s ease-in-out',
                               transform: hoveredCard === idx ? 'translateY(-3px)' : 'translateY(0)',
                             }}
@@ -122,8 +126,8 @@ const Education = () => {
                       </Stack>
                       <Typography 
                         variant="body2" 
-                        color="text.secondary"
                         sx={{
+                          color: '#18181B',
                           transition: 'all 0.4s ease-in-out',
                           transform: hoveredCard === idx ? 'translateY(-5px)' : 'translateY(0)',
                         }}
@@ -132,9 +136,9 @@ const Education = () => {
                       </Typography>
                       <Typography 
                         variant="body2" 
-                        color="text.secondary" 
                         mt={1}
                         sx={{
+                          color: '#18181B',
                           transition: 'all 0.4s ease-in-out',
                           transform: hoveredCard === idx ? 'translateY(-5px)' : 'translateY(0)',
                         }}

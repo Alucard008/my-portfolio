@@ -61,14 +61,14 @@ const inputStyles = {
 };
 
 const inputHoverStyles = {
-  border: '2px solid #2563eb',
+  border: '2px solid #1DE782',
   boxShadow: '0 6px 20px rgba(37, 99, 235, 0.15)',
   transform: 'translateY(-2px)',
   backgroundColor: '#ffffff',
 };
 
 const inputFocusStyles = {
-  border: '2px solid #2563eb',
+  border: '2px solid #1DE782',
   boxShadow: '0 0 0 4px rgba(37, 99, 235, 0.1), 0 8px 25px rgba(37, 99, 235, 0.15)',
   transform: 'translateY(-1px)',
   backgroundColor: '#ffffff',
@@ -116,8 +116,8 @@ const Contact = () => {
   };
 
   return (
-    <Box id="contact" sx={{ py: { xs: 8, md: 12 }, minHeight: { xs: 'auto', md: '100vh' }, display: 'flex', alignItems: 'center' }}>
-      <Container maxWidth="xl" sx={{ px: { xs: 2, sm: 3, md: 4 }, background: 'linear-gradient(135deg, #e3f2fd 0%, #f3e5f5 100%)', py: { xs: 4, md: 8 } }}>
+    <Box id="contact" sx={{ py: { xs: 8, md: 12 }, minHeight: { xs: 'auto', md: '100vh' }, display: 'flex', alignItems: 'center', backgroundColor: '#fff' }}>
+      <Container maxWidth="xl" sx={{ px: { xs: 2, sm: 3, md: 4 }, background: '#fff', py: { xs: 4, md: 8 }, border:"1px solid #1DE782",borderRadius: 4, boxShadow: '0 4px 24px rgba(0,0,0,0.04)' }}>
                   <Box
             sx={{
               display: 'flex',
@@ -140,10 +140,10 @@ const Contact = () => {
             }}
           >
             <Box textAlign="center" mb={6} sx={{ width: '100%' }}>
-              <Typography variant="h3" color="primary" sx={{ fontWeight: 400, mb: 2, fontSize: { xs: '1.8rem', sm: '2rem', md: '2.5rem' } }}>
+              <Typography variant="h3" sx={{ color: '#18181B', fontWeight: 700, mb: 2, fontSize: { xs: '1.8rem', sm: '2rem', md: '2.5rem' } }}>
                 Get in Touch
               </Typography>
-              <Typography variant="h6" color="text.secondary" sx={{ lineHeight: 1.6, textAlign: 'center', fontSize: { xs: '0.9rem', md: '1rem' } }}>
+              <Typography variant="body1" sx={{ color: '#18181B', lineHeight: 1.6, textAlign: 'center', fontSize: { xs: '0.9rem', md: '1rem' } }}>
                 Feel free to reach out for collaborations, job opportunities, or just a friendly chat.
               </Typography>
             </Box>
@@ -156,34 +156,30 @@ const Contact = () => {
                     sx={{
                       width: '100%',
                       borderRadius: '20px',
-                      background: 'linear-gradient(135deg, rgba(255, 255, 255, 0.9) 0%, rgba(248, 250, 252, 0.9) 100%)',
-                      border: '2px solid rgba(37, 99, 235, 0.08)',
-                      backdropFilter: 'blur(10px)',
+                      background: '#fff',
+                      border: '2px solid #18181B',
+                      boxShadow: '0 2px 12px rgba(29,231,130,0.04)',
                       transition: 'all 0.4s cubic-bezier(0.4, 0, 0.2, 1)',
                       cursor: 'pointer',
                       position: 'relative',
                       overflow: 'hidden',
-                      '&::before': {
-                        content: '""',
-                        position: 'absolute',
-                        top: 0,
-                        left: 0,
-                        right: 0,
-                        bottom: 0,
-                        background: 'linear-gradient(135deg, rgba(37, 99, 235, 0.05) 0%, transparent 100%)',
-                        opacity: 0,
-                        transition: 'opacity 0.3s ease-in-out',
-                      },
                       '&:hover': {
                         transform: 'translateY(-8px) scale(1.02)',
-                        boxShadow: '0 20px 40px rgba(37, 99, 235, 0.15), 0 8px 16px rgba(0, 0, 0, 0.1)',
-                        border: '2px solid rgba(37, 99, 235, 0.2)',
-                        '&::before': {
-                          opacity: 1,
-                        },
+                        boxShadow: '0 20px 40px rgba(29,231,130,0.10), 0 8px 16px rgba(0, 0, 0, 0.08)',
+                        border: '2px solid #18181B',
                         '& .click-text': {
                           opacity: 1,
                           transform: 'translateX(0)',
+                        },
+                        '& .contact-icon-btn': {
+                          background: '#18181B',
+                          color: '#1DE782',
+                          border: '2px solid #1DE782',
+                          transform: 'scale(1.15) rotate(5deg)',
+                          boxShadow: '0 8px 25px rgba(29,231,130,0.15)',
+                        },
+                        '& .contact-icon-btn svg': {
+                          color: '#1DE782',
                         },
                       },
                     }}
@@ -213,7 +209,7 @@ const Contact = () => {
                             width: '60px',
                             height: '60px',
                             borderRadius: '50%',
-                            background: 'linear-gradient(135deg, rgba(37, 99, 235, 0.1) 0%, rgba(37, 99, 235, 0.05) 100%)',
+                            background: 'rgba(29,231,130,0.08)',
                             animation: 'pulse 2s infinite',
                             '@keyframes pulse': {
                               '0%, 100%': {
@@ -232,23 +228,17 @@ const Contact = () => {
                           target="_blank"
                           sx={{
                             fontSize: '2.2rem',
-                            background: 'linear-gradient(135deg, #ffffff 0%, #f8fafc 100%)',
-                            color: '#1e293b',
+                            background: '#fff',
+                            color: '#1DE782',
                             borderRadius: '16px',
                             p: 2,
-                            boxShadow: '0 4px 12px rgba(0, 0, 0, 0.1)',
-                            border: '2px solid #e2e8f0',
+                            boxShadow: '0 4px 12px rgba(29,231,130,0.08)',
+                            border: '2px solid black',
                             transition: 'all 0.3s cubic-bezier(0.4, 0, 0.2, 1)',
-                            '&:hover': {
-                              transform: 'scale(1.15) rotate(5deg)',
-                              boxShadow: '0 8px 25px rgba(0, 0, 0, 0.15)',
-                              background: 'linear-gradient(135deg, #1e293b 0%, #334155 100%)',
-                              color: '#ffffff',
-                              border: '2px solid #1e293b',
-                            },
                           }}
+                          className="contact-icon-btn"
                         >
-                          {info.icon}
+                          {React.cloneElement(info.icon, { style: { color: '#1DE782', transition: 'all 0.3s cubic-bezier(0.4, 0, 0.2, 1)' } })}
                         </IconButton>
                       </Box>
                       <Box sx={{ flex: 1 }}>
@@ -256,24 +246,24 @@ const Contact = () => {
                           variant="h6" 
                           fontWeight={700} 
                           mb={1} 
-                          color="primary"
                           sx={{
+                            color: 'black',
                             fontSize: '1.1rem',
                             letterSpacing: '0.5px',
-                            textTransform: 'uppercase',
+                            // textTransform: 'uppercase',
                           }}
                         >
                           {info.label}
                         </Typography>
                         <Typography 
                           variant="body1" 
-                          color="text.secondary" 
                           sx={{ 
+                            color: '#18181B',
                             wordBreak: 'break-word',
                             fontSize: '1rem',
                             lineHeight: 1.5,
                             fontWeight: 500,
-                            opacity: 0.8,
+                            opacity: 0.9,
                           }}
                         >
                           {info.value}
@@ -290,7 +280,7 @@ const Contact = () => {
                         <Typography
                           variant="caption"
                           sx={{
-                            color: 'primary.main',
+                            color: 'black',
                             fontWeight: 600,
                             fontSize: '0.8rem',
                             textTransform: 'uppercase',
@@ -321,7 +311,7 @@ const Contact = () => {
               <ContactMailIcon 
                 sx={{ 
                   fontSize: '6.2rem', 
-                  color: 'primary.main', 
+                  color: 'black',
                   opacity: 0.9,
                   animation: 'float 3s ease-in-out infinite, pulse 2s ease-in-out infinite',
                   '@keyframes float': {
@@ -330,26 +320,26 @@ const Contact = () => {
                   },
                   '@keyframes pulse': {
                     '0%, 100%': { 
-                      filter: 'drop-shadow(0 0 0 rgba(37, 99, 235, 0))',
+                      filter: 'drop-shadow(0 0 0 rgba(29,231,130,0))',
                       transform: 'scale(1)',
                     },
                     '50%': { 
-                      filter: 'drop-shadow(0 0 20px rgba(37, 99, 235, 0.3))',
+                      filter: 'drop-shadow(0 0 20px rgba(29,231,130,0.3))',
                       transform: 'scale(1.05)',
                     },
                   },
                   transition: 'all 0.3s ease-in-out',
                   '&:hover': {
                     transform: 'scale(1.1) rotate(5deg)',
-                    filter: 'drop-shadow(0 0 25px rgba(37, 99, 235, 0.4))',
+                    filter: 'drop-shadow(0 0 25px rgba(29,231,130,0.4))',
                   },
                 }} 
               />
               <Typography 
                 variant="h4" 
-                color="primary" 
                 fontWeight={600}
                 sx={{
+                  color: '#18181B',
                   mt: 2,
                   animation: 'slideInUp 0.8s ease-out',
                   '@keyframes slideInUp': {
@@ -375,12 +365,12 @@ const Contact = () => {
                 borderRadius: 4,
                 width: '100%',
                 maxWidth: '600px',
-                background: 'rgba(255, 255, 255, 0.95)',
-                border: '1px solid rgba(37, 99, 235, 0.1)',
-                backdropFilter: 'blur(10px)',
+                background: '#fff',
+                border: '2px solid #18181B',
+                boxShadow: '0 2px 12px rgba(29,231,130,0.04)',
               }}
             >
-              <Typography variant="h5" color="primary" fontWeight={600} mb={4} textAlign="center">
+              <Typography variant="h5" sx={{ color: 'black', fontWeight: 700 }} mb={4} textAlign="center">
                 Send Me a Message
               </Typography>
               <Box
@@ -394,7 +384,7 @@ const Contact = () => {
                   <Grid >
                     <Grid item xs={12} sm={6}>
                       <Box sx={inputContainerStyles}>
-                        <label style={labelStyles}>Full Name</label>
+                        <label style={{ ...labelStyles, color: '#18181B' }}>Full Name</label>
                         <input
                           type="text"
                           name="name"
@@ -410,7 +400,7 @@ const Contact = () => {
                     </Grid>
                     <Grid item xs={12} sm={6}>
                       <Box sx={inputContainerStyles}>
-                        <label style={labelStyles}>Email Address</label>
+                        <label style={{ ...labelStyles, color: '#18181B' }}>Email Address</label>
                         <input
                           type="email"
                           name="email"
@@ -426,7 +416,7 @@ const Contact = () => {
                     </Grid>
                     <Grid item xs={12} sm={6}>
                     <Box sx={inputContainerStyles}>
-                    <label style={labelStyles}>Subject</label>
+                    <label style={{ ...labelStyles, color: '#18181B' }}>Subject</label>
                     <input
                       type="text"
                       name="subject"
@@ -444,7 +434,7 @@ const Contact = () => {
                     </Grid>
                     <Grid item xs={12} sm={6}>
                     <Box sx={inputContainerStyles}>
-                    <label style={labelStyles}>Your Message</label>
+                    <label style={{ ...labelStyles, color: '#18181B' }}>Your Message</label>
                     <textarea
                       name="message"
                       required
@@ -471,19 +461,22 @@ const Contact = () => {
                   <Button
                     variant="contained"
                     type="submit"
-                    color="primary"
                     size="large"
                     sx={{
                       borderRadius: 3,
-                      fontWeight: 600,
+                      fontWeight: 700,
                       py: 2,
                       fontSize: '1.1rem',
-                      boxShadow: '0 4px 12px rgba(37,99,235,0.2)',
+                      background: '#1DE782',
+                      color: '#18181B',
+                      boxShadow: '0 4px 12px rgba(29,231,130,0.15)',
                       transition: 'all 0.3s ease-in-out',
                       '&:hover': {
-                        background: '#1741a6',
+                        background: '#18181B',
+                        color: '#1DE782',
                         transform: 'translateY(-2px)',
-                        boxShadow: '0 6px 20px rgba(37,99,235,0.3)',
+                        boxShadow: '0 6px 20px rgba(29,231,130,0.25)',
+                        border: '2px solid #1DE782',
                       },
                     }}
                   >

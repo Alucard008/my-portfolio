@@ -11,6 +11,7 @@ const ImageBlob = ({
   messageVisible,
   messageIndex,
   messages,
+  size = { xs: 320, sm: 400, md: 480, lg: 560 },
 }) => {
 //   const theme = useTheme();
 
@@ -32,7 +33,7 @@ const ImageBlob = ({
             flexDirection: 'column',
             alignItems: 'center',
             justifyContent: 'flex-end',
-            height: '120px', // fixed height to reserve space
+            // height: '120px', // fixed height to reserve space
             mb: 2,
             zIndex: 10,
           }}
@@ -44,14 +45,14 @@ const ImageBlob = ({
                 sx={{
                   fontSize: '0.8rem',
                   fontWeight: 600,
-                  color: 'primary.main',
+                  color:"#1DE782",
                   mb: 1,
                 }}
               >
                 Hover Image
               </Typography>
               <KeyboardArrowDownIcon
-                sx={{ fontSize: '1.5rem', color: '#2563eb' }}
+                sx={{ fontSize: '1.5rem', color: '#1DE782' }}
               />
             </>
           )}
@@ -64,8 +65,9 @@ const ImageBlob = ({
                 padding: '10px 16px',
                 marginBottom: '10px',
                 boxShadow: '0 8px 32px rgba(0, 0, 0, 0.15)',
-                border: '2px solid #e0e7ef',
+                border: '2px solid black',
                 width: 'fit-content',
+                backgroundColor:"#1DE782",
               }}
             >
               <Typography
@@ -73,7 +75,7 @@ const ImageBlob = ({
                 sx={{
                   fontSize: '1rem',
                   fontWeight: 600,
-                  color: '#2563eb',
+                  color: 'black',
                   textAlign: 'center',
                   letterSpacing: '0.3px',
                   opacity: messageVisible ? 1 : 0,
@@ -94,8 +96,8 @@ const ImageBlob = ({
         <Box
           sx={{
             position: 'relative',
-            width: { xs: 280, sm: 350, md: 400, lg: 500 },
-            height: { xs: 280, sm: 350, md: 400, lg: 500 },
+            width: size,
+            height: size,
             cursor: 'pointer',
             mx: 'auto',
             mb: { xs: 1, md: 0 },
