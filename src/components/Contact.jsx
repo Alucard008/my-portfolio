@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useRef, useState } from 'react';
 import {
   Box,
   Container,
@@ -17,6 +17,7 @@ import LinkedInIcon from '@mui/icons-material/LinkedIn';
 import GitHubIcon from '@mui/icons-material/GitHub';
 import ContactMailIcon from '@mui/icons-material/ContactMail';
 import FadeInItem from './FadeInItem';
+import emailjs from '@emailjs/browser';
 
 const contactInfo = [
   {
@@ -99,6 +100,16 @@ const inputContainerStyles = {
 
 
 const Contact = () => {
+  const form = useRef();
+  const [sending, setSending] = useState(false);
+  const [success, setSuccess] = useState(null); // null, true, or false
+
+  // Replace these with your actual EmailJS credentials
+  const SERVICE_ID = 'service_bpa8qwe';
+  const TEMPLATE_ID = 'template_vgyeplp';
+  const PUBLIC_KEY = 's5vX28yswTeaLfFBi';
+  const TEMPLATE_ID_2 = 'template_wm9o3vb';
+
   const handleInputHover = (e) => {
     Object.assign(e.target.style, inputHoverStyles);
   };
@@ -114,6 +125,37 @@ const Contact = () => {
   const handleInputBlur = (e) => {
     Object.assign(e.target.style, inputStyles);
   };
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    setSending(true);
+    setSuccess(null);
+  
+    const formData = form.current;
+  
+    // 1. Send confirmation email to the user (uses form data)
+    emailjs.sendForm(SERVICE_ID, TEMPLATE_ID, formData, PUBLIC_KEY)
+      .then(() => {
+        // 2. Send internal notification email to yourself
+        return emailjs.send(SERVICE_ID, TEMPLATE_ID_2, {
+          name: formData['name'].value,
+          email: formData['email'].value,
+          subject: formData['subject'].value,
+          message: formData['message'].value,
+          to_email: 'abdullahmasood163@gmail.com', // ✅ YOUR email
+        }, PUBLIC_KEY);
+      })
+      .then(() => {
+        setSending(false);
+        setSuccess(true);
+        form.current.reset();
+      })
+      .catch(() => {
+        setSending(false);
+        setSuccess(false);
+      });
+  };
+  
 
   return (
     <Box id="contact" sx={{ py: { xs: 8, md: 12 }, minHeight: { xs: 'auto', md: '100vh' }, display: 'flex', alignItems: 'center', backgroundColor: '#fff' }}>
@@ -375,9 +417,8 @@ const Contact = () => {
               </Typography>
               <Box
                 component="form"
-                action="mailto:abdullahmasood163@gmail.com"
-                method="POST"
-                encType="text/plain"
+                ref={form}
+                onSubmit={handleSubmit}
                 sx={{ width: '100%' }}
               >
                 <Stack spacing={3}>
@@ -479,9 +520,20 @@ const Contact = () => {
                         border: '2px solid #1DE782',
                       },
                     }}
+                    disabled={sending}
                   >
-                    Send Message
+                    {sending ? 'Sending...' : 'Send Message'}
                   </Button>
+                  {success === true && (
+                    <Typography color="success.main" mt={2} align="center">
+                      Message sent successfully!
+                    </Typography>
+                  )}
+                  {success === false && (
+                    <Typography color="error.main" mt={2} align="center">
+                      Failed to send message. Please try again later.
+                    </Typography>
+                  )}
                 </Stack>
               </Box>
             </Paper>
