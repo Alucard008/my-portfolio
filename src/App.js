@@ -11,6 +11,8 @@ import Education from './components/Education';
 import Contact from './components/Contact';
 import Footer from './components/Footer';
 import SwirlCursor from './components/SwirlCursor';
+import ChatbotButton from './components/Chatbot/ChatbotButton';
+import AdminButton from './components/Admin/AdminButton';
 
 const theme = createTheme({
   palette: {
@@ -80,6 +82,8 @@ function App() {
       <Education />
       <Contact />
       <Footer />
+      <ChatbotButton />
+      <AdminButton />
     </ThemeProvider>
   );
 }

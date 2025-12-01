@@ -1,0 +1,78 @@
+import React from 'react';
+import { Box, Typography, Paper } from '@mui/material';
+import { motion } from 'framer-motion';
+
+const MessageList = ({ messages }) => {
+  return (
+    <>
+      {messages.map((message, index) => (
+        <motion.div
+          key={index}
+          initial={{ opacity: 0, y: 10 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.3 }}
+        >
+          <Box
+            sx={{
+              display: 'flex',
+              justifyContent: message.role === 'user' ? 'flex-end' : 'flex-start',
+              mb: 2,
+            }}
+          >
+            <Paper
+              elevation={message.role === 'user' ? 2 : 1}
+              sx={{
+                p: 1.5,
+                maxWidth: '75%',
+                borderRadius: 2,
+                backgroundColor:
+                  message.role === 'user'
+                    ? '#6366F1'
+                    : message.error
+                    ? '#FEE2E2'
+                    : 'white',
+                color:
+                  message.role === 'user'
+                    ? 'white'
+                    : message.error
+                    ? '#DC2626'
+                    : 'text.primary',
+                boxShadow:
+                  message.role === 'user'
+                    ? '0 2px 8px rgba(99, 102, 241, 0.3)'
+                    : '0 1px 3px rgba(0,0,0,0.1)',
+              }}
+            >
+              <Typography
+                variant="body2"
+                sx={{
+                  whiteSpace: 'pre-wrap',
+                  wordBreak: 'break-word',
+                  lineHeight: 1.6,
+                }}
+              >
+                {message.content}
+              </Typography>
+              {message.confidence && (
+                <Typography
+                  variant="caption"
+                  sx={{
+                    display: 'block',
+                    mt: 0.5,
+                    opacity: 0.7,
+                    fontSize: '0.65rem',
+                  }}
+                >
+                  Confidence: {Math.round(message.confidence * 100)}%
+                </Typography>
+              )}
+            </Paper>
+          </Box>
+        </motion.div>
+      ))}
+    </>
+  );
+};
+
+export default MessageList;
+
