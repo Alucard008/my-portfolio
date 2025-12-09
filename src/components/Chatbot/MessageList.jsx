@@ -27,20 +27,28 @@ const MessageList = ({ messages }) => {
                 borderRadius: 2,
                 backgroundColor:
                   message.role === 'user'
-                    ? '#6366F1'
+                    ? 'linear-gradient(135deg, #6366F1 0%, #A855F7 100%)'
                     : message.error
-                    ? '#FEE2E2'
-                    : 'white',
+                    ? 'rgba(220, 38, 38, 0.2)'
+                    : 'rgba(255, 255, 255, 0.05)',
+                background:
+                  message.role === 'user'
+                    ? 'linear-gradient(135deg, #6366F1 0%, #A855F7 100%)'
+                    : message.error
+                    ? 'rgba(220, 38, 38, 0.2)'
+                    : 'rgba(255, 255, 255, 0.05)',
+                backdropFilter: message.role !== 'user' ? 'blur(10px)' : 'none',
+                border: message.role !== 'user' ? '1px solid rgba(99, 102, 241, 0.3)' : 'none',
                 color:
                   message.role === 'user'
                     ? 'white'
                     : message.error
-                    ? '#DC2626'
-                    : 'text.primary',
+                    ? '#FCA5A5'
+                    : 'rgba(255, 255, 255, 0.9)',
                 boxShadow:
                   message.role === 'user'
                     ? '0 2px 8px rgba(99, 102, 241, 0.3)'
-                    : '0 1px 3px rgba(0,0,0,0.1)',
+                    : '0 1px 3px rgba(99, 102, 241, 0.2)',
               }}
             >
               <Typography
@@ -61,6 +69,7 @@ const MessageList = ({ messages }) => {
                     mt: 0.5,
                     opacity: 0.7,
                     fontSize: '0.65rem',
+                    color: message.role === 'user' ? 'rgba(255, 255, 255, 0.8)' : 'rgba(255, 255, 255, 0.6)',
                   }}
                 >
                   Confidence: {Math.round(message.confidence * 100)}%

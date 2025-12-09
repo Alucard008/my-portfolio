@@ -12,6 +12,8 @@ import {
 import FadeInSection from './FadeInSection';
 import FadeInItem from './FadeInItem';
 import skillsData from '../data/skills';
+import AOS from 'aos';
+import 'aos/dist/aos.css';
 
 const SkillBar = ({ name, icon, level, index }) => {
   const [animatedLevel, setAnimatedLevel] = useState(0);
@@ -43,9 +45,9 @@ const SkillBar = ({ name, icon, level, index }) => {
           >
             {icon}
           </Box>
-          <Typography fontWeight={500} sx={{ color: '#18181B' }}>{name}</Typography>
+          <Typography fontWeight={500} sx={{ color: 'rgba(255, 255, 255, 0.9)' }}>{name}</Typography>
         </Stack>
-        <Typography variant="body2" sx={{ color: '#18181B' }}>
+        <Typography variant="body2" sx={{ color: 'rgba(255, 255, 255, 0.7)' }}>
           {animatedLevel}%
         </Typography>
       </Stack>
@@ -55,12 +57,12 @@ const SkillBar = ({ name, icon, level, index }) => {
         sx={{
           height: 8,
           borderRadius: 4,
-          backgroundColor: '#e0e7ef',
+          backgroundColor: 'rgba(255, 255, 255, 0.1)',
           transition: 'all 0.8s ease-in-out',
           '& .MuiLinearProgress-bar': {
             background: isHovered 
-              ? 'linear-gradient(90deg, #6366F1 0%, #6366F1 100%)'
-              : '#1DE782',
+              ? 'linear-gradient(90deg, #6366F1 0%, #A855F7 100%)'
+              : 'linear-gradient(90deg, #6366F1 0%, #A855F7 100%)',
             transition: 'transform 0.8s ease-in-out',
           },
         }}
@@ -70,15 +72,40 @@ const SkillBar = ({ name, icon, level, index }) => {
 };
 
 const Skills = () => {
+  useEffect(() => {
+    AOS.init({
+      once: true,
+      duration: 1000,
+    });
+  }, []);
+
   return (
     <FadeInSection>
-      <Box id="skills" sx={{ py: { xs: 8, md: 12 }, backgroundColor: '#fff' }}>
+      <Box id="skills" sx={{ py: { xs: 8, md: 12 }, backgroundColor: '#030014' }}>
         <Container maxWidth="xl" sx={{ px: { xs: 2, sm: 3, md: 4 } }}>
           <Box textAlign="center" mb={6}>
-            <Typography variant="h4" sx={{ color: '#18181B', fontWeight: 700 }} gutterBottom>
+            <Typography 
+              variant="h4" 
+              sx={{ 
+                fontWeight: 700,
+                background: 'linear-gradient(135deg, #6366F1 0%, #A855F7 100%)',
+                WebkitBackgroundClip: 'text',
+                WebkitTextFillColor: 'transparent',
+                backgroundClip: 'text',
+              }} 
+              gutterBottom
+              data-aos="fade-up"
+            >
               Skills
             </Typography>
-            <Typography variant="body1" sx={{ color: '#18181B' }} maxWidth="md" mx="auto">
+            <Typography 
+              variant="body1" 
+              sx={{ color: 'rgba(255, 255, 255, 0.7)' }} 
+              maxWidth="md" 
+              mx="auto"
+              data-aos="fade-up"
+              data-aos-delay="200"
+            >
               A comprehensive overview of my technical expertise and proficiency levels across various domains, including programming languages, web development, artificial intelligence, and other technologies.
             </Typography>
           </Box>
@@ -91,23 +118,38 @@ const Skills = () => {
                     sx={{
                       p: { xs: 3, md: 4 },
                       borderRadius: 3,
-                      backgroundColor: '#f8fafc',
+                      backgroundColor: 'rgba(255, 255, 255, 0.05)',
+                      backdropFilter: 'blur(10px)',
                       height: { xs: 'auto', md: '500px' },
                       minHeight: { xs: '400px', md: '500px' },
                       display: 'flex',
                       width: '100%',
                       maxWidth: { xs: '100%', md: '400px' },
                       flexDirection: 'column',
-                      border: '1px solid #e2e8f0',
+                      border: '1px solid rgba(99, 102, 241, 0.2)',
                       transition: 'all 0.3s ease-in-out',
                       '&:hover': {
                         transform: 'translateY(-8px)',
-                        boxShadow: '0 12px 30px rgba(0,0,0,0.15)',
-                        borderColor: '#1DE782',
+                        boxShadow: '0 12px 30px rgba(99, 102, 241, 0.3)',
+                        borderColor: 'rgba(168, 85, 247, 0.5)',
+                        background: 'rgba(255, 255, 255, 0.08)',
                       },
                     }}
+                    data-aos="fade-up"
+                    data-aos-delay={index * 100}
                   >
-                    <Typography variant="h6" sx={{ color: '#18181B', mb: 3, fontWeight: 600, textAlign: 'center' }}>
+                    <Typography 
+                      variant="h6" 
+                      sx={{ 
+                        background: 'linear-gradient(135deg, #6366F1 0%, #A855F7 100%)',
+                        WebkitBackgroundClip: 'text',
+                        WebkitTextFillColor: 'transparent',
+                        backgroundClip: 'text',
+                        mb: 3, 
+                        fontWeight: 600, 
+                        textAlign: 'center' 
+                      }}
+                    >
                       {category}
                     </Typography>
                     <Box sx={{ flex: 1, overflow: 'hidden' }}>

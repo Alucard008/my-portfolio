@@ -45,14 +45,14 @@ const ImageBlob = ({
                 sx={{
                   fontSize: '0.8rem',
                   fontWeight: 600,
-                  color:"#1DE782",
+                  color:"#A855F7",
                   mb: 1,
                 }}
               >
                 Hover Image
               </Typography>
               <KeyboardArrowDownIcon
-                sx={{ fontSize: '1.5rem', color: '#1DE782' }}
+                sx={{ fontSize: '1.5rem', color: '#A855F7' }}
               />
             </>
           )}
@@ -60,14 +60,13 @@ const ImageBlob = ({
             <Box
               sx={{
                 position: 'relative',
-                background: 'white',
+                background: 'linear-gradient(135deg, #6366F1 0%, #A855F7 100%)',
                 borderRadius: '20px',
                 padding: '10px 16px',
                 marginBottom: '10px',
-                boxShadow: '0 8px 32px rgba(0, 0, 0, 0.15)',
-                border: '2px solid black',
+                boxShadow: '0 8px 32px rgba(99, 102, 241, 0.3)',
+                border: '2px solid rgba(168, 85, 247, 0.5)',
                 width: 'fit-content',
-                backgroundColor:"#1DE782",
               }}
             >
               <Typography
@@ -75,7 +74,7 @@ const ImageBlob = ({
                 sx={{
                   fontSize: '1rem',
                   fontWeight: 600,
-                  color: 'black',
+                  color: 'white',
                   textAlign: 'center',
                   letterSpacing: '0.3px',
                   opacity: messageVisible ? 1 : 0,
@@ -236,7 +235,7 @@ const ImageBlob = ({
                 Hover Image
               </Typography>
               <KeyboardArrowDownIcon
-                sx={{ fontSize: '1.5rem', color: '#2563eb' }}
+                sx={{ fontSize: '1.5rem', color: '#A855F7' }}
               />
             </>
           )}
@@ -245,11 +244,11 @@ const ImageBlob = ({
               sx={{
                 mt: 2,
                 position: 'relative',
-                background: 'white',
+                background: 'linear-gradient(135deg, #6366F1 0%, #A855F7 100%)',
                 borderRadius: '20px',
                 padding: '10px 16px',
-                boxShadow: '0 8px 32px rgba(0, 0, 0, 0.15)',
-                border: '2px solid #e0e7ef',
+                boxShadow: '0 8px 32px rgba(99, 102, 241, 0.3)',
+                border: '2px solid rgba(168, 85, 247, 0.5)',
                 width: 'fit-content',
                 mx: 'auto',
               }}
@@ -259,7 +258,7 @@ const ImageBlob = ({
                 sx={{
                   fontSize: '1rem',
                   fontWeight: 600,
-                  color: '#2563eb',
+                  color: 'white',
                   textAlign: 'center',
                   letterSpacing: '0.3px',
                   opacity: messageVisible ? 1 : 0,

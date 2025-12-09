@@ -52,13 +52,16 @@ const Header = () => {
         component="a" 
         href="#home" 
         sx={{ 
-          color: '#2563eb', 
+          background: 'linear-gradient(135deg, #6366F1 0%, #A855F7 100%)',
+          WebkitBackgroundClip: 'text',
+          WebkitTextFillColor: 'transparent',
+          backgroundClip: 'text',
           textDecoration: 'none', 
           fontWeight: 'bold' 
         }}
         onClick={e => handleSmoothScroll(e, '#home')}
       >
-        Abdullah<span style={{ color: '#2563eb' }}> Bin Masood</span>
+        Abdullah<span style={{ background: 'linear-gradient(135deg, #A855F7 0%, #6366F1 100%)', WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent', backgroundClip: 'text' }}> Bin Masood</span>
       </Typography>
       <List>
         {navItems.map((item, index) => (
@@ -74,20 +77,23 @@ const Header = () => {
 
   return (
     <>
-      <AppBar position="fixed" sx={{ backgroundColor: 'rgba(10, 17, 32, 0.95)', borderBottom:"1px solid #1DE782" ,borderLeft:"none",borderRight:"none", backdropFilter: 'blur(10px)' }}  style={{borderRadius: '0px'  , boxShadow:"none"}}>
+      <AppBar position="fixed" sx={{ backgroundColor: 'rgba(3, 0, 20, 0.95)', borderBottom:"1px solid rgba(99, 102, 241, 0.3)" ,borderLeft:"none",borderRight:"none", backdropFilter: 'blur(10px)' }}  style={{borderRadius: '0px'  , boxShadow:"none"}}>
         <Toolbar sx={{ justifyContent: 'space-between', px: { xs: 2, sm: 3 } }}>
           <Typography
             variant="h6"
             component="a"
             href="#home"
             sx={{
-              color: '#1DE782',
+              background: 'linear-gradient(135deg, #6366F1 0%, #A855F7 100%)',
+              WebkitBackgroundClip: 'text',
+              WebkitTextFillColor: 'transparent',
+              backgroundClip: 'text',
               textDecoration: 'none',
               fontWeight: 'bold',
               fontSize: { xs: '1rem', sm: '1.25rem' },
             }}
           >
-            Abdullah<span style={{ color: '#1DE782' }}> Bin Masood</span>
+            Abdullah<span style={{ background: 'linear-gradient(135deg, #A855F7 0%, #6366F1 100%)', WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent', backgroundClip: 'text' }}> Bin Masood</span>
           </Typography>
 
           {isMobile ? (
@@ -109,9 +115,12 @@ const Header = () => {
                     color="inherit"
                     sx={{
                       fontWeight: 500,
-                      color: '#1DE782',
-                      transition: 'color 0.2s',
-                      '&:hover': { color: '#059669' },
+                      color: 'rgba(255, 255, 255, 0.7)',
+                      transition: 'all 0.3s ease',
+                      '&:hover': { 
+                        color: '#A855F7',
+                        transform: 'translateY(-2px)',
+                      },
                     }}
                     onClick={e => handleSmoothScroll(e, item.href)}
                   >

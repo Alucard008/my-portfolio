@@ -115,19 +115,23 @@ const Chatbot = ({ onClose }) => {
     >
       <Paper
         elevation={8}
+        onClick={(e) => e.stopPropagation()}
+        onMouseDown={(e) => e.stopPropagation()}
         sx={{
           position: 'fixed',
-          bottom: 20,
-          right: 20,
+          bottom: { xs: '10%', sm: 20 },
+          right: { xs: '5%', sm: 20 },
+          left: { xs: '5%', sm: 'auto' },
           width: { xs: '90vw', sm: '400px', md: '450px' },
+          maxWidth: { xs: '90vw', sm: '450px' },
           height: { xs: '80vh', sm: '600px' },
-          maxHeight: '600px',
+          maxHeight: { xs: '80vh', sm: '600px' },
           display: 'flex',
           flexDirection: 'column',
           borderRadius: 3,
           overflow: 'hidden',
           zIndex: 1300,
-          boxShadow: '0 8px 32px rgba(0,0,0,0.12)',
+          boxShadow: '0 8px 32px rgba(0,0,0,0.3)',
         }}
       >
         {/* Header */}
@@ -162,19 +166,19 @@ const Chatbot = ({ onClose }) => {
             flex: 1,
             overflowY: 'auto',
             p: 2,
-            backgroundColor: '#F8FAFC',
+            backgroundColor: '#030014',
             '&::-webkit-scrollbar': {
               width: '8px',
             },
             '&::-webkit-scrollbar-track': {
-              background: '#f1f1f1',
+              background: 'rgba(3, 0, 20, 0.4)',
             },
             '&::-webkit-scrollbar-thumb': {
-              background: '#888',
+              background: 'rgba(99, 102, 241, 0.3)',
               borderRadius: '4px',
             },
             '&::-webkit-scrollbar-thumb:hover': {
-              background: '#555',
+              background: 'rgba(99, 102, 241, 0.5)',
             },
           }}
         >
@@ -188,12 +192,14 @@ const Chatbot = ({ onClose }) => {
                   gap: 1,
                   p: 1.5,
                   borderRadius: 2,
-                  backgroundColor: 'white',
+                  backgroundColor: 'rgba(255, 255, 255, 0.05)',
+                  backdropFilter: 'blur(10px)',
+                  border: '1px solid rgba(99, 102, 241, 0.3)',
                   maxWidth: '80%',
                 }}
               >
-                <CircularProgress size={16} />
-                <Typography variant="body2" color="text.secondary">
+                <CircularProgress size={16} sx={{ color: '#6366F1' }} />
+                <Typography variant="body2" sx={{ color: 'rgba(255, 255, 255, 0.7)' }}>
                   Thinking...
                 </Typography>
               </Box>
@@ -214,14 +220,14 @@ const Chatbot = ({ onClose }) => {
                 sx={{
                   px: 2,
                   py: 1,
-                  backgroundColor: '#F1F5F9',
-                  borderTop: '1px solid #E2E8F0',
+                  backgroundColor: 'rgba(255, 255, 255, 0.05)',
+                  borderTop: '1px solid rgba(99, 102, 241, 0.3)',
                   display: 'flex',
                   flexWrap: 'wrap',
                   gap: 0.5,
                 }}
               >
-                <Typography variant="caption" color="text.secondary" sx={{ mr: 1 }}>
+                <Typography variant="caption" sx={{ color: 'rgba(255, 255, 255, 0.7)', mr: 1 }}>
                   Sources:
                 </Typography>
                 {sources.map((source, index) => (
@@ -244,8 +250,9 @@ const Chatbot = ({ onClose }) => {
         <Box
           sx={{
             p: 2,
-            borderTop: '1px solid #E2E8F0',
-            backgroundColor: 'white',
+            borderTop: '1px solid rgba(99, 102, 241, 0.3)',
+            backgroundColor: 'rgba(255, 255, 255, 0.05)',
+            backdropFilter: 'blur(10px)',
           }}
         >
           <Box sx={{ display: 'flex', gap: 1 }}>
@@ -263,6 +270,24 @@ const Chatbot = ({ onClose }) => {
               sx={{
                 '& .MuiOutlinedInput-root': {
                   borderRadius: 2,
+                  backgroundColor: 'rgba(255, 255, 255, 0.05)',
+                  color: '#fff',
+                  '& fieldset': {
+                    borderColor: 'rgba(99, 102, 241, 0.3)',
+                  },
+                  '&:hover fieldset': {
+                    borderColor: 'rgba(168, 85, 247, 0.5)',
+                  },
+                  '&.Mui-focused fieldset': {
+                    borderColor: 'rgba(168, 85, 247, 0.7)',
+                  },
+                },
+                '& .MuiInputBase-input': {
+                  color: '#fff',
+                  '&::placeholder': {
+                    color: 'rgba(255, 255, 255, 0.5)',
+                    opacity: 1,
+                  },
                 },
               }}
             />

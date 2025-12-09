@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import {
   Box,
   Typography,
@@ -17,9 +17,18 @@ import {
 import WorkIcon from '@mui/icons-material/Work';
 import FadeInItem from './FadeInItem';
 import experiences from '../data/experience';
+import AOS from 'aos';
+import 'aos/dist/aos.css';
 
 const Experience = () => {
   const [hoveredCard, setHoveredCard] = useState(null);
+
+  useEffect(() => {
+    AOS.init({
+      once: true,
+      duration: 1000,
+    });
+  }, []);
 
   const handleCardHover = (index) => {
     setHoveredCard(index);
@@ -30,10 +39,21 @@ const Experience = () => {
   };
 
   return (
-    <Box id="experience" sx={{ py: { xs: 8, md: 12 }, backgroundColor: '#18181B' }}>
+    <Box id="experience" sx={{ py: { xs: 8, md: 12 }, backgroundColor: '#030014' }}>
       <Container maxWidth="lg" sx={{ px: { xs: 2, sm: 3, md: 4 } }}>
         <Box textAlign="center" mb={6}>
-          <Typography variant="h4" sx={{ color: '#1DE782', fontWeight: 700 }} gutterBottom>
+          <Typography 
+            variant="h4" 
+            sx={{ 
+              fontWeight: 700,
+              background: 'linear-gradient(135deg, #6366F1 0%, #A855F7 100%)',
+              WebkitBackgroundClip: 'text',
+              WebkitTextFillColor: 'transparent',
+              backgroundClip: 'text',
+            }} 
+            gutterBottom
+            data-aos="fade-up"
+          >
             Experience
           </Typography>
         </Box>
@@ -46,32 +66,34 @@ const Experience = () => {
                 elevation={hoveredCard === idx ? 8 : 3}
                 onMouseEnter={() => handleCardHover(idx)}
                 onMouseLeave={handleCardLeave}
-                sx={{ 
-                  borderRadius: 3, 
-                  width: '100%',
-                  cursor: 'pointer',
-                  transition: 'all 0.6s cubic-bezier(0.4, 0, 0.2, 1)',
-                  backgroundColor: '#232336',
-                  color: '#fff',
-                  border: '1.5px solid #6366F1',
-                  '&:hover': {
-                    boxShadow: '0 20px 40px #6366F144',
-                    border: '2px solid #6366F1',
-                    transform: 'translateY(-8px) scale(1.02)',
-                  },
-                }}
+                    sx={{ 
+                      borderRadius: 3, 
+                      width: '100%',
+                      cursor: 'pointer',
+                      transition: 'all 0.6s cubic-bezier(0.4, 0, 0.2, 1)',
+                      backgroundColor: 'rgba(255, 255, 255, 0.05)',
+                      backdropFilter: 'blur(10px)',
+                      color: '#fff',
+                      border: '1.5px solid rgba(99, 102, 241, 0.3)',
+                      '&:hover': {
+                        boxShadow: '0 20px 40px rgba(99, 102, 241, 0.3)',
+                        border: '2px solid rgba(168, 85, 247, 0.5)',
+                        transform: 'translateY(-8px) scale(1.02)',
+                        background: 'rgba(255, 255, 255, 0.08)',
+                      },
+                    }}
               >
                 <CardContent sx={{ p: 3 }}>
                   <Box sx={{ display: 'flex', alignItems: 'center', mb: 2 }}>
                     <WorkIcon 
-                      sx={{
-                        fontSize: '1.5rem',
-                        mr: 2,
-                        color: '#1DE782',
-                        textShadow: '0 0 8px #1DE78299',
-                        transition: 'all 0.4s ease-in-out',
-                        transform: hoveredCard === idx ? 'rotate(360deg) scale(1.2)' : 'rotate(0deg) scale(1)',
-                      }}
+                        sx={{
+                          fontSize: '1.5rem',
+                          mr: 2,
+                          color: '#6366F1',
+                          textShadow: '0 0 8px rgba(99, 102, 241, 0.6)',
+                          transition: 'all 0.4s ease-in-out',
+                          transform: hoveredCard === idx ? 'rotate(360deg) scale(1.2)' : 'rotate(0deg) scale(1)',
+                        }}
                     />
                     <Box>
                       <Typography 
@@ -79,7 +101,7 @@ const Experience = () => {
                         fontWeight={600}
                         sx={{
                           transition: 'all 0.4s ease-in-out',
-                          color: hoveredCard === idx ? '#6366F1' : '#fff',
+                          color: hoveredCard === idx ? '#A855F7' : '#fff',
                         }}
                       >
                         {exp.title}
@@ -142,9 +164,9 @@ const Experience = () => {
                 <TimelineSeparator>
                   <TimelineDot 
                     sx={{
-                      background: '#232336',
-                      border: '2.5px solid #1DE782',
-                      boxShadow: '0 0 12px #1DE78299',
+                      background: 'rgba(255, 255, 255, 0.05)',
+                      border: '2.5px solid #6366F1',
+                      boxShadow: '0 0 12px rgba(99, 102, 241, 0.6)',
                       transition: 'all 0.4s ease-in-out',
                       transform: hoveredCard === idx ? 'scale(1.3) rotate(360deg)' : 'scale(1) rotate(0deg)',
                     }}
@@ -152,8 +174,8 @@ const Experience = () => {
                     <WorkIcon 
                       sx={{
                         fontSize: hoveredCard === idx ? '1.2rem' : '1rem',
-                        color: '#1DE782',
-                        textShadow: '0 0 8px #1DE78299',
+                        color: '#6366F1',
+                        textShadow: '0 0 8px rgba(99, 102, 241, 0.6)',
                         transition: 'all 0.4s ease-in-out',
                       }}
                     />
@@ -196,12 +218,14 @@ const Experience = () => {
                           padding:"10px",
                           cursor: 'pointer',
                           transition: 'all 0.6s cubic-bezier(0.4, 0, 0.2, 1)',
-                          backgroundColor: '#232336',
+                          backgroundColor: 'rgba(255, 255, 255, 0.05)',
+                          backdropFilter: 'blur(10px)',
                           color: '#fff',
-                          border: '1.5px solid #1DE782',
+                          border: '1.5px solid rgba(99, 102, 241, 0.3)',
                           '&:hover': {
-                            boxShadow: '0 20px 40px #6366F144',
-                            border: '2px solid #6366F1',
+                            boxShadow: '0 20px 40px rgba(99, 102, 241, 0.3)',
+                            border: '2px solid rgba(168, 85, 247, 0.5)',
+                            background: 'rgba(255, 255, 255, 0.08)',
                           },
                         }}
                       >
@@ -211,7 +235,7 @@ const Experience = () => {
                             fontWeight={600}
                             sx={{
                               transition: 'all 0.4s ease-in-out',
-                              color: hoveredCard === idx ? '#6366F1' : '#fff',
+                              color: hoveredCard === idx ? '#A855F7' : '#fff',
                               transform: hoveredCard === idx ? 'translateY(-5px)' : 'translateY(0)',
                             }}
                           >

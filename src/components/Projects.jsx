@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import {
   Box,
   Container,
@@ -26,6 +26,8 @@ import VisibilityIcon from '@mui/icons-material/Visibility';
 import CloseIcon from '@mui/icons-material/Close';
 import FadeInItem from './FadeInItem';
 import projectsData from '../data/projects';
+import AOS from 'aos';
+import 'aos/dist/aos.css';
 
 const filters = [
   { label: 'All Projects', value: 'all', icon: <CodeIcon /> },
@@ -39,6 +41,13 @@ const Projects = () => {
   const [filter, setFilter] = useState('all');
   const [hoveredCard, setHoveredCard] = useState(null);
   const [videoModal, setVideoModal] = useState({ open: false, videoUrl: '' });
+
+  useEffect(() => {
+    AOS.init({
+      once: true,
+      duration: 1000,
+    });
+  }, []);
 
   const filteredProjects =
     filter === 'all'
@@ -66,35 +75,38 @@ const Projects = () => {
       id="projects"
       sx={{
         py: { xs: 12, md: 16 },
-        background: 'linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%)',
+        background: '#030014',
       }}
     >
       <Container maxWidth="xl" sx={{ px: { xs: 2, sm: 3, md: 4 } }}>
         <Box textAlign="center" mb={8}>
           <Typography
             variant="h3"
-            color="primary"
             gutterBottom
             sx={{
               fontWeight: 700,
               mb: 3,
               fontSize: { xs: '2.5rem', md: '3rem' },
-              background: "black",
+              background: 'linear-gradient(135deg, #6366F1 0%, #A855F7 100%)',
               WebkitBackgroundClip: 'text',
               WebkitTextFillColor: 'transparent',
+              backgroundClip: 'text',
             }}
+            data-aos="fade-up"
           >
             Projects
           </Typography>
           <Typography
             variant="body1"
-            color="black"
             maxWidth="md"
             mx="auto"
             sx={{
               lineHeight: 1.6,
               fontSize: { xs: '1rem', md: '1.1rem' },
+              color: 'rgba(255, 255, 255, 0.7)',
             }}
+            data-aos="fade-up"
+            data-aos-delay="200"
           >
             A curated list of full-stack, AI/ML, and embedded systems projects
             that reflect my professional journey and problem-solving skills.
@@ -107,9 +119,9 @@ const Projects = () => {
             sx={{
               p: 1,
               borderRadius: 4,
-              background: 'rgba(255, 255, 255, 0.8)',
+              background: 'rgba(255, 255, 255, 0.05)',
               backdropFilter: 'blur(10px)',
-              border: '1px solid rgba(37, 99, 235, 0.1)',
+              border: '1px solid rgba(99, 102, 241, 0.2)',
             }}
           >
            <Stack
@@ -132,20 +144,20 @@ const Projects = () => {
                     borderRadius: 2,
                     fontSize: { xs: '0.95rem', sm: '1rem' },
                    boxShadow: 'none',
-                   border: '2px solid #18181B',
-                   background: filter === value ? '#1DE782' : undefined,
-                   color: filter === value ? '#18181B' : undefined,
+                   border: '2px solid rgba(99, 102, 241, 0.3)',
+                   background: filter === value ? 'linear-gradient(135deg, #6366F1 0%, #A855F7 100%)' : 'transparent',
+                   color: filter === value ? '#fff' : 'rgba(255, 255, 255, 0.7)',
                     transition: 'all 0.3s ease-in-out',
                     '&:hover': {
                       transform: 'translateY(-2px)',
-                      background: '#18181B',
-                      color: '#1DE782',
-                      border: '2px solid #1DE782',
+                      background: 'rgba(99, 102, 241, 0.2)',
+                      color: '#fff',
+                      border: '2px solid rgba(168, 85, 247, 0.5)',
                     },
                     '&.MuiChip-colorSuccess': {
-                      background: '#1DE782',
-                      color: '#18181B',
-                      border: '2px solid #18181B',
+                      background: 'linear-gradient(135deg, #6366F1 0%, #A855F7 100%)',
+                      color: '#fff',
+                      border: '2px solid rgba(168, 85, 247, 0.5)',
                     },
                   }}
             />
@@ -174,10 +186,9 @@ const Projects = () => {
                   sx={{
                       width: '100%',
                       borderRadius: '20px',
-                      background:
-                        'linear-gradient(135deg, rgba(255, 255, 255, 0.9) 0%, rgba(248, 250, 252, 0.9) 100%)',
-                      border: '2px solid rgba(37, 99, 235, 0.08)',
+                      background: 'rgba(255, 255, 255, 0.05)',
                       backdropFilter: 'blur(10px)',
+                      border: '2px solid rgba(99, 102, 241, 0.2)',
                       transition: 'all 0.4s cubic-bezier(0.4, 0, 0.2, 1)',
                       cursor: 'pointer',
                       position: 'relative',
@@ -194,15 +205,16 @@ const Projects = () => {
                       right: 0,
                       bottom: 0,
                       background:
-                        'linear-gradient(135deg, rgba(37, 99, 235, 0.05) 0%, transparent 100%)',
+                        'linear-gradient(135deg, rgba(99, 102, 241, 0.1) 0%, rgba(168, 85, 247, 0.1) 100%)',
                       opacity: 0,
                       transition: 'opacity 0.3s ease-in-out',
                     },
                     '&:hover': {
                       transform: 'translateY(-12px) scale(1.02)',
                       boxShadow:
-                        '0 25px 50px rgba(37, 99, 235, 0.15), 0 12px 24px rgba(0, 0, 0, 0.1)',
-                      border: '2px solid rgba(37, 99, 235, 0.2)',
+                        '0 25px 50px rgba(99, 102, 241, 0.3), 0 12px 24px rgba(0, 0, 0, 0.2)',
+                      border: '2px solid rgba(168, 85, 247, 0.5)',
+                      background: 'rgba(255, 255, 255, 0.08)',
                       '&::before': {
                         opacity: 1,
                       },
@@ -260,7 +272,7 @@ const Projects = () => {
                           height: 120,
                           borderRadius: '50%',
                           background:
-                            'linear-gradient(135deg, #1DE782 0%, #1DE782 100%)',
+                            'linear-gradient(135deg, #6366F1 0%, #A855F7 100%)',
                           display: 'flex',
                           alignItems: 'center',
                           justifyContent: 'center',
@@ -390,8 +402,8 @@ const Projects = () => {
                       fontWeight={700}
                       gutterBottom
                       sx={{
-                        color: 'black',
-                        backgroundColor:"#1DE782",
+                        color: 'white',
+                        background: 'linear-gradient(135deg, #6366F1 0%, #A855F7 100%)',
                         height:"50px",
                         width:"auto",
                         display:"flex",
@@ -416,7 +428,7 @@ const Projects = () => {
                         project.description.map((line, i) => (
                           <Typography
                             variant="body2"
-                            sx={{ color: '#18181B' }}
+                            sx={{ color: 'rgba(255, 255, 255, 0.8)' }}
                             key={i}
                             style={{
                               lineHeight: 1.5,
@@ -459,18 +471,18 @@ const Projects = () => {
                             key={i}
                             size="small"
                             sx={{
-                              background: '#1DE782',
-                              color: '#18181B',
+                              background: 'rgba(99, 102, 241, 0.2)',
+                              color: '#fff',
                               fontWeight: 600,
                               fontSize: '0.75rem',
                               borderRadius: 2,
                               height: '24px',
-                              border: '2px solid #18181B',
+                              border: '1px solid rgba(168, 85, 247, 0.3)',
                               transition: 'all 0.3s ease-in-out',
                               '&:hover': {
-                                background: '#18181B',
-                                color: '#1DE782',
-                                border: '2px solid #1DE782',
+                                background: 'rgba(168, 85, 247, 0.3)',
+                                color: '#fff',
+                                border: '1px solid rgba(168, 85, 247, 0.5)',
                                 transform: 'scale(1.05)',
                               },
                             }}

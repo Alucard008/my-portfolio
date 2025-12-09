@@ -16,25 +16,26 @@ import AdminButton from './components/Admin/AdminButton';
 
 const theme = createTheme({
   palette: {
-    mode: 'light',
+    mode: 'dark',
     primary: {
       main: '#6366F1', // Indigo 500
       contrastText: '#fff',
     },
     secondary: {
-      main: '#F472B6', // Pink 400
+      main: '#A855F7', // Purple 500
       contrastText: '#fff',
     },
     accent: {
-      main: '#38BDF8', // Sky 400
+      main: '#1DE782', // Green accent
+      contrastText: '#000',
     },
     background: {
-      default: '#F8FAFC',
-      paper: '#FFFFFF',
+      default: '#030014', // Dark purple/black background
+      paper: 'rgba(255, 255, 255, 0.05)',
     },
     text: {
-      primary: '#18181B',
-      secondary: '#6366F1',
+      primary: '#FFFFFF',
+      secondary: 'rgba(255, 255, 255, 0.7)',
     },
   },
   typography: {
