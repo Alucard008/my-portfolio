@@ -3,10 +3,11 @@ import { Box } from '@mui/material';
 
 const GRID_SIZE = 30; // Bigger board
 const CELL_SIZE = 25; // Bigger cells
-// Create initial snake with 20 segments
+const MAX_SNAKE_LENGTH = 10; // Maximum snake length
+// Create initial snake with 10 segments
 const createInitialSnake = (startX, startY, direction = 'right') => {
   const segments = [];
-  for (let i = 0; i < 20; i++) {
+  for (let i = 0; i < 10; i++) {
     if (direction === 'right') {
       segments.push({ x: startX - i, y: startY });
     } else if (direction === 'left') {
@@ -19,7 +20,7 @@ const createInitialSnake = (startX, startY, direction = 'right') => {
   }
   return segments;
 };
-const GAME_SPEED = 100; // Medium fast speed
+const GAME_SPEED = 60; // Smoother, faster updates
 
 const BackgroundSnake = () => {
   // Snake 1 (Purple/Indigo - Square shape)
@@ -38,7 +39,7 @@ const BackgroundSnake = () => {
   const snakeRef2 = useRef(createInitialSnake(20, 20, 'left'));
   const gameLoopRef2 = useRef(null);
 
-  // AI: Calculate best direction towards food (with collision avoidance for other snake)
+  // AI: Calculate best direction towards food (with collision avoidance for other snake and walls)
   const calculateDirection = (head, foodPos, currentDir, snakeBody, otherSnakeBody = []) => {
     // Possible directions
     const directions = [
@@ -58,11 +59,13 @@ const BackgroundSnake = () => {
       let newHeadX = head.x + dir.x;
       let newHeadY = head.y + dir.y;
       
-      // Wrap around
-      if (newHeadX < 0) newHeadX = GRID_SIZE - 1;
-      if (newHeadX >= GRID_SIZE) newHeadX = 0;
-      if (newHeadY < 0) newHeadY = GRID_SIZE - 1;
-      if (newHeadY >= GRID_SIZE) newHeadY = 0;
+      // Check wall collision (no wrapping)
+      const willHitWall = newHeadX < 0 || newHeadX >= GRID_SIZE || 
+                          newHeadY < 0 || newHeadY >= GRID_SIZE;
+      
+      if (willHitWall) {
+        return { dir, score: -1000 }; // Avoid walls
+      }
       
       // Check collision with own body (excluding tail since it will move)
       const willCollideSelf = snakeBody.slice(0, -1).some(segment => 
@@ -78,18 +81,9 @@ const BackgroundSnake = () => {
         return { dir, score: -1000 }; // Avoid collision
       }
       
-      // Calculate distance to food (with wrapping)
-      let dx = foodPos.x - newHeadX;
-      let dy = foodPos.y - newHeadY;
-      
-      // Handle wrapping for distance calculation
-      if (Math.abs(dx) > GRID_SIZE / 2) {
-        dx = dx > 0 ? dx - GRID_SIZE : dx + GRID_SIZE;
-      }
-      if (Math.abs(dy) > GRID_SIZE / 2) {
-        dy = dy > 0 ? dy - GRID_SIZE : dy + GRID_SIZE;
-      }
-      
+      // Calculate distance to food (no wrapping)
+      const dx = foodPos.x - newHeadX;
+      const dy = foodPos.y - newHeadY;
       const distance = Math.abs(dx) + Math.abs(dy);
       
       // Prefer directions that get closer to food
@@ -135,41 +129,58 @@ const BackgroundSnake = () => {
       const currentFood1 = foodRef1.current;
       const otherSnake = snake2StateRef.current;
       
-      // AI: Calculate best direction towards food (avoiding other snake)
+      // AI: Calculate best direction towards food (avoiding other snake and walls)
       const newDirection1 = calculateDirection(head1, currentFood1, directionRef1.current, prevSnake1, otherSnake);
       directionRef1.current = newDirection1;
       
       head1.x += newDirection1.x;
       head1.y += newDirection1.y;
 
-      // Wrap around edges
-      if (head1.x < 0) head1.x = GRID_SIZE - 1;
-      if (head1.x >= GRID_SIZE) head1.x = 0;
-      if (head1.y < 0) head1.y = GRID_SIZE - 1;
-      if (head1.y >= GRID_SIZE) head1.y = 0;
+      // Check wall collision - if hit wall, recalculate direction or reset
+      if (head1.x < 0 || head1.x >= GRID_SIZE || head1.y < 0 || head1.y >= GRID_SIZE) {
+        // Try to find a safe direction that doesn't hit walls
+        const safeDirections = [
+          { x: 1, y: 0 }, { x: -1, y: 0 }, { x: 0, y: 1 }, { x: 0, y: -1 }
+        ].filter(dir => {
+          const testX = prevSnake1[0].x + dir.x;
+          const testY = prevSnake1[0].y + dir.y;
+          return testX >= 0 && testX < GRID_SIZE && testY >= 0 && testY < GRID_SIZE;
+        });
+        
+        if (safeDirections.length > 0) {
+          // Use first safe direction
+          directionRef1.current = safeDirections[0];
+          head1.x = prevSnake1[0].x + directionRef1.current.x;
+          head1.y = prevSnake1[0].y + directionRef1.current.y;
+        } else {
+          // No safe direction, reset snake
+          const resetSnake1 = createInitialSnake(10, 10, 'right');
+          directionRef1.current = { x: 1, y: 0 };
+          const resetFood1 = generateFood(resetSnake1, otherSnake);
+          foodRef1.current = resetFood1;
+          setFood1(resetFood1);
+          snake1StateRef.current = resetSnake1;
+          return resetSnake1;
+        }
+      }
 
       let newSnake1 = [head1, ...prevSnake1];
 
       // Check if food eaten
       if (head1.x === currentFood1.x && head1.y === currentFood1.y) {
-        // Don't pop - snake grows!
+        // Only grow if under max length, otherwise just move
+        if (newSnake1.length < MAX_SNAKE_LENGTH) {
+          // Don't pop - snake grows!
+        } else {
+          // At max length, always pop tail
+          newSnake1.pop();
+        }
         const newFood1 = generateFood(newSnake1, otherSnake);
         foodRef1.current = newFood1;
         setFood1(newFood1);
       } else {
-        // Only remove tail if food not eaten
+        // Always remove tail if food not eaten
         newSnake1.pop();
-      }
-
-      // Reset if too long
-      if (newSnake1.length > 100) {
-        const resetSnake1 = createInitialSnake(10, 10, 'right');
-        directionRef1.current = { x: 1, y: 0 };
-        const resetFood1 = generateFood(resetSnake1, otherSnake);
-        foodRef1.current = resetFood1;
-        setFood1(resetFood1);
-        snake1StateRef.current = resetSnake1;
-        return resetSnake1;
       }
 
       snake1StateRef.current = newSnake1;
@@ -184,41 +195,58 @@ const BackgroundSnake = () => {
       const currentFood2 = foodRef2.current;
       const otherSnake = snake1StateRef.current;
       
-      // AI: Calculate best direction towards food (avoiding other snake)
+      // AI: Calculate best direction towards food (avoiding other snake and walls)
       const newDirection2 = calculateDirection(head2, currentFood2, directionRef2.current, prevSnake2, otherSnake);
       directionRef2.current = newDirection2;
       
       head2.x += newDirection2.x;
       head2.y += newDirection2.y;
 
-      // Wrap around edges
-      if (head2.x < 0) head2.x = GRID_SIZE - 1;
-      if (head2.x >= GRID_SIZE) head2.x = 0;
-      if (head2.y < 0) head2.y = GRID_SIZE - 1;
-      if (head2.y >= GRID_SIZE) head2.y = 0;
+      // Check wall collision - if hit wall, recalculate direction or reset
+      if (head2.x < 0 || head2.x >= GRID_SIZE || head2.y < 0 || head2.y >= GRID_SIZE) {
+        // Try to find a safe direction that doesn't hit walls
+        const safeDirections = [
+          { x: 1, y: 0 }, { x: -1, y: 0 }, { x: 0, y: 1 }, { x: 0, y: -1 }
+        ].filter(dir => {
+          const testX = prevSnake2[0].x + dir.x;
+          const testY = prevSnake2[0].y + dir.y;
+          return testX >= 0 && testX < GRID_SIZE && testY >= 0 && testY < GRID_SIZE;
+        });
+        
+        if (safeDirections.length > 0) {
+          // Use first safe direction
+          directionRef2.current = safeDirections[0];
+          head2.x = prevSnake2[0].x + directionRef2.current.x;
+          head2.y = prevSnake2[0].y + directionRef2.current.y;
+        } else {
+          // No safe direction, reset snake
+          const resetSnake2 = createInitialSnake(20, 20, 'left');
+          directionRef2.current = { x: -1, y: 0 };
+          const resetFood2 = generateFood(otherSnake, resetSnake2);
+          foodRef2.current = resetFood2;
+          setFood2(resetFood2);
+          snake2StateRef.current = resetSnake2;
+          return resetSnake2;
+        }
+      }
 
       let newSnake2 = [head2, ...prevSnake2];
 
       // Check if food eaten
       if (head2.x === currentFood2.x && head2.y === currentFood2.y) {
-        // Don't pop - snake grows!
+        // Only grow if under max length, otherwise just move
+        if (newSnake2.length < MAX_SNAKE_LENGTH) {
+          // Don't pop - snake grows!
+        } else {
+          // At max length, always pop tail
+          newSnake2.pop();
+        }
         const newFood2 = generateFood(otherSnake, newSnake2);
         foodRef2.current = newFood2;
         setFood2(newFood2);
       } else {
-        // Only remove tail if food not eaten
+        // Always remove tail if food not eaten
         newSnake2.pop();
-      }
-
-      // Reset if too long
-      if (newSnake2.length > 100) {
-        const resetSnake2 = createInitialSnake(20, 20, 'left');
-        directionRef2.current = { x: -1, y: 0 };
-        const resetFood2 = generateFood(otherSnake, resetSnake2);
-        foodRef2.current = resetFood2;
-        setFood2(resetFood2);
-        snake2StateRef.current = resetSnake2;
-        return resetSnake2;
       }
 
       snake2StateRef.current = newSnake2;
@@ -298,7 +326,7 @@ const BackgroundSnake = () => {
             boxShadow: index === 0
               ? '0 0 8px rgba(99, 102, 241, 0.4)'
               : '0 0 4px rgba(168, 85, 247, 0.3)',
-            transition: 'all 0.1s linear',
+            transition: 'all 0.06s ease-out',
           }}
         />
       ))}
@@ -322,7 +350,7 @@ const BackgroundSnake = () => {
             boxShadow: index === 0
               ? '0 0 8px rgba(6, 182, 212, 0.4)'
               : '0 0 4px rgba(20, 184, 166, 0.3)',
-            transition: 'all 0.1s linear',
+            transition: 'all 0.06s ease-out',
           }}
         />
       ))}

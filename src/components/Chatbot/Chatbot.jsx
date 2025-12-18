@@ -6,13 +6,12 @@ import {
   TextField,
   IconButton,
   CircularProgress,
-  Chip,
 } from '@mui/material';
 import SendIcon from '@mui/icons-material/Send';
 import CloseIcon from '@mui/icons-material/Close';
 import SmartToyIcon from '@mui/icons-material/SmartToy';
 import MessageList from './MessageList';
-import { motion, AnimatePresence } from 'framer-motion';
+import { motion } from 'framer-motion';
 import { API_BASE_URL } from '../../config/api';
 
 const Chatbot = ({ onClose }) => {
@@ -25,7 +24,6 @@ const Chatbot = ({ onClose }) => {
   ]);
   const [input, setInput] = useState('');
   const [loading, setLoading] = useState(false);
-  const [sources, setSources] = useState([]);
   const messagesEndRef = useRef(null);
   const inputRef = useRef(null);
 
@@ -46,10 +44,9 @@ const Chatbot = ({ onClose }) => {
       timestamp: new Date(),
     };
 
-    setMessages((prev) => [...prev, userMessage]);
-    setInput('');
-    setLoading(true);
-    setSources([]);
+      setMessages((prev) => [...prev, userMessage]);
+      setInput('');
+      setLoading(true);
 
     try {
       const conversationHistory = messages.map((msg) => ({
@@ -83,7 +80,6 @@ const Chatbot = ({ onClose }) => {
       };
 
       setMessages((prev) => [...prev, assistantMessage]);
-      setSources(data.sources || []);
     } catch (error) {
       console.error('Error sending message:', error);
       const errorMessage = {
@@ -208,43 +204,6 @@ const Chatbot = ({ onClose }) => {
           <div ref={messagesEndRef} />
         </Box>
 
-        {/* Sources */}
-        <AnimatePresence>
-          {sources.length > 0 && (
-            <motion.div
-              initial={{ height: 0, opacity: 0 }}
-              animate={{ height: 'auto', opacity: 1 }}
-              exit={{ height: 0, opacity: 0 }}
-            >
-              <Box
-                sx={{
-                  px: 2,
-                  py: 1,
-                  backgroundColor: 'rgba(255, 255, 255, 0.05)',
-                  borderTop: '1px solid rgba(99, 102, 241, 0.3)',
-                  display: 'flex',
-                  flexWrap: 'wrap',
-                  gap: 0.5,
-                }}
-              >
-                <Typography variant="caption" sx={{ color: 'rgba(255, 255, 255, 0.7)', mr: 1 }}>
-                  Sources:
-                </Typography>
-                {sources.map((source, index) => (
-                  <Chip
-                    key={index}
-                    label={source}
-                    size="small"
-                    sx={{
-                      fontSize: '0.7rem',
-                      height: '20px',
-                    }}
-                  />
-                ))}
-              </Box>
-            </motion.div>
-          )}
-        </AnimatePresence>
 
         {/* Input */}
         <Box
