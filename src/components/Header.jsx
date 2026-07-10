@@ -14,7 +14,6 @@ import {
   Link,
 } from '@mui/material';
 import MenuIcon from '@mui/icons-material/Menu';
-import FadeInItem from './FadeInItem';
 
 const navItems = [
   { text: 'Home', href: '#home' },
@@ -34,7 +33,6 @@ const Header = () => {
     setMobileOpen(!mobileOpen);
   };
 
-  // Smooth scroll handler
   const handleSmoothScroll = (e, href) => {
     e.preventDefault();
     const id = href.replace('#', '');
@@ -42,34 +40,29 @@ const Header = () => {
     if (el) {
       el.scrollIntoView({ behavior: 'smooth' });
     }
-    setMobileOpen(false); // close drawer if open
+    setMobileOpen(false);
   };
 
   const drawer = (
-    <Box sx={{ textAlign: 'center' }}>
-      <Typography 
-        variant="h6" 
-        component="a" 
-        href="#home" 
-        sx={{ 
-          background: 'linear-gradient(135deg, #6366F1 0%, #A855F7 100%)',
-          WebkitBackgroundClip: 'text',
-          WebkitTextFillColor: 'transparent',
-          backgroundClip: 'text',
-          textDecoration: 'none', 
-          fontWeight: 'bold' 
+    <Box sx={{ textAlign: 'center', pt: 2 }}>
+      <Typography
+        variant="h6"
+        component="a"
+        href="#home"
+        sx={{
+          color: 'text.primary',
+          textDecoration: 'none',
+          fontWeight: 600,
         }}
-        onClick={e => handleSmoothScroll(e, '#home')}
+        onClick={(e) => handleSmoothScroll(e, '#home')}
       >
-        Abdullah<span style={{ background: 'linear-gradient(135deg, #A855F7 0%, #6366F1 100%)', WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent', backgroundClip: 'text' }}> Bin Masood</span>
+        Abdullah Bin Masood
       </Typography>
       <List>
-        {navItems.map((item, index) => (
-          <FadeInItem key={item.text} delay={index * 0.1}>
-            <ListItem button component="a" href={item.href} onClick={e => handleSmoothScroll(e, item.href)}>
-              <ListItemText primary={item.text} />
-            </ListItem>
-          </FadeInItem>
+        {navItems.map((item) => (
+          <ListItem key={item.text} button component="a" href={item.href} onClick={(e) => handleSmoothScroll(e, item.href)}>
+            <ListItemText primary={item.text} />
+          </ListItem>
         ))}
       </List>
     </Box>
@@ -77,23 +70,30 @@ const Header = () => {
 
   return (
     <>
-      <AppBar position="fixed" sx={{ backgroundColor: 'rgba(3, 0, 20, 0.95)', borderBottom:"1px solid rgba(99, 102, 241, 0.3)" ,borderLeft:"none",borderRight:"none", backdropFilter: 'blur(10px)' }}  style={{borderRadius: '0px'  , boxShadow:"none"}}>
+      <AppBar
+        position="fixed"
+        elevation={0}
+        sx={{
+          backgroundColor: 'rgba(250, 250, 248, 0.9)',
+          backdropFilter: 'blur(8px)',
+          borderBottom: '1px solid',
+          borderColor: 'divider',
+          color: 'text.primary',
+        }}
+      >
         <Toolbar sx={{ justifyContent: 'space-between', px: { xs: 2, sm: 3 } }}>
           <Typography
             variant="h6"
             component="a"
             href="#home"
             sx={{
-              background: 'linear-gradient(135deg, #6366F1 0%, #A855F7 100%)',
-              WebkitBackgroundClip: 'text',
-              WebkitTextFillColor: 'transparent',
-              backgroundClip: 'text',
+              color: 'text.primary',
               textDecoration: 'none',
-              fontWeight: 'bold',
-              fontSize: { xs: '1rem', sm: '1.25rem' },
+              fontWeight: 600,
+              fontSize: { xs: '1rem', sm: '1.1rem' },
             }}
           >
-            Abdullah<span style={{ background: 'linear-gradient(135deg, #A855F7 0%, #6366F1 100%)', WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent', backgroundClip: 'text' }}> Bin Masood</span>
+            Abdullah Bin Masood
           </Typography>
 
           {isMobile ? (
@@ -106,27 +106,25 @@ const Header = () => {
               </Drawer>
             </>
           ) : (
-            <Box sx={{ display: 'flex', gap: 3 }}>
-              {navItems.map((item, index) => (
-                <FadeInItem key={item.text} delay={index * 0.1}>
-                  <Link
-                    href={item.href}
-                    underline="none"
-                    color="inherit"
-                    sx={{
-                      fontWeight: 500,
-                      color: 'rgba(255, 255, 255, 0.7)',
-                      transition: 'all 0.3s ease',
-                      '&:hover': { 
-                        color: '#A855F7',
-                        transform: 'translateY(-2px)',
-                      },
-                    }}
-                    onClick={e => handleSmoothScroll(e, item.href)}
-                  >
-                    {item.text}
-                  </Link>
-                </FadeInItem>
+            <Box sx={{ display: 'flex', gap: 4 }}>
+              {navItems.map((item) => (
+                <Link
+                  key={item.text}
+                  href={item.href}
+                  underline="none"
+                  sx={{
+                    fontWeight: 500,
+                    fontSize: '0.95rem',
+                    color: 'text.secondary',
+                    transition: 'color 0.2s ease',
+                    '&:hover': {
+                      color: 'primary.main',
+                    },
+                  }}
+                  onClick={(e) => handleSmoothScroll(e, item.href)}
+                >
+                  {item.text}
+                </Link>
               ))}
             </Box>
           )}

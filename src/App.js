@@ -10,60 +10,70 @@ import Projects from './components/Projects';
 import Education from './components/Education';
 import Contact from './components/Contact';
 import Footer from './components/Footer';
-import SwirlCursor from './components/SwirlCursor';
-import ChatbotButton from './components/Chatbot/ChatbotButton';
-import AdminButton from './components/Admin/AdminButton';
 
 const theme = createTheme({
   palette: {
-    mode: 'dark',
+    mode: 'light',
     primary: {
-      main: '#6366F1', // Indigo 500
-      contrastText: '#fff',
+      main: '#B5502E', // muted terracotta accent
+      contrastText: '#FFFFFF',
     },
     secondary: {
-      main: '#A855F7', // Purple 500
-      contrastText: '#fff',
-    },
-    accent: {
-      main: '#1DE782', // Green accent
-      contrastText: '#000',
+      main: '#3D3D3A',
+      contrastText: '#FFFFFF',
     },
     background: {
-      default: '#030014', // Dark purple/black background
-      paper: 'rgba(255, 255, 255, 0.05)',
+      default: '#FAFAF8',
+      paper: '#FFFFFF',
     },
     text: {
-      primary: '#FFFFFF',
-      secondary: 'rgba(255, 255, 255, 0.7)',
+      primary: '#1A1A1A',
+      secondary: '#6B6A65',
     },
+    divider: '#E5E3DE',
   },
   typography: {
-    fontFamily: 'Inter, Roboto, Arial, sans-serif',
-    h1: { fontWeight: 700 },
-    h2: { fontWeight: 700 },
-    h3: { fontWeight: 700 },
-    h4: { fontWeight: 700 },
+    fontFamily: 'Inter, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Arial, sans-serif',
+    h1: { fontWeight: 600, letterSpacing: '-0.02em' },
+    h2: { fontWeight: 600, letterSpacing: '-0.02em' },
+    h3: { fontWeight: 600, letterSpacing: '-0.01em' },
+    h4: { fontWeight: 600, letterSpacing: '-0.01em' },
     h5: { fontWeight: 600 },
     h6: { fontWeight: 600 },
+    body1: { lineHeight: 1.7 },
+    body2: { lineHeight: 1.6 },
   },
   shape: {
-    borderRadius: 16,
+    borderRadius: 10,
   },
   components: {
     MuiButton: {
       styleOverrides: {
         root: {
-          borderRadius: 12,
+          borderRadius: 8,
           textTransform: 'none',
           fontWeight: 600,
+          boxShadow: 'none',
+        },
+        contained: {
+          '&:hover': {
+            boxShadow: 'none',
+          },
         },
       },
     },
     MuiPaper: {
       styleOverrides: {
         root: {
-          borderRadius: 16,
+          borderRadius: 10,
+          backgroundImage: 'none',
+        },
+      },
+    },
+    MuiChip: {
+      styleOverrides: {
+        root: {
+          fontWeight: 500,
         },
       },
     },
@@ -74,7 +84,6 @@ function App() {
   return (
     <ThemeProvider theme={theme}>
       <CssBaseline />
-      <SwirlCursor />
       <Header />
       <Hero />
       <Skills />
@@ -83,8 +92,6 @@ function App() {
       <Education />
       <Contact />
       <Footer />
-      <ChatbotButton />
-      <AdminButton />
     </ThemeProvider>
   );
 }
